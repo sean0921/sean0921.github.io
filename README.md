@@ -4,10 +4,14 @@ Here is Sean's Personal Page
 
 ## Projects
 
+* [timeseries_process](https://github.com/sean0921/timeseries_process): Port traditional Fortran code to cross-platform environment with [**GNU Build System**](https://en.wikipedia.org/wiki/GNU_Build_System), and enhance some details.  Final aim is porting and rewriting in Python version.
+
+* [PyGG](https://github.com/sean0921/PyGG): Designing PyGObject Program for Applying GMT 6(or later) Mapping Functions 
+
 * [hello_gmt_docker](https://github.com/sean0921/hello_gmt_docker): Use Debian GNU/Linux as base image of Docker image.
 
-* [gtk3-testing](https://github.com/sean0921/gtk3-testing): Everyone uses Qt or VC++... to build GUI, but I just want to try this ~GNOME
-'s~ GTK ToolKit.
+* [gtk3-testing](https://github.com/sean0921/gtk3-testing): Everyone uses Qt or VC++... to build GUI, but I just want to try this <s>GNOME
+'s</s> GTK ToolKit.
 
 * [Earth Note](https://earthnote.github.io): Some simple personal notes about Earth Science
 
