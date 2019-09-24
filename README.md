@@ -9,6 +9,7 @@
 * Amateur sysadmin related tools.
 * Internet culture and history research:
   - [Bullitin Board System](https://zh.wikipedia.org/wiki/BBS) culture, development([MapleBBS](https://www.google.com/search?client=firefox-b-e&q=MapleBBS)) and history in Taiwan.
+* Simple musical score testing, for e.g., test [MuseScore](https://musescore.org)
 
 ## Projects
 
