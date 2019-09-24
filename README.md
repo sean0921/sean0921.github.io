@@ -1,7 +1,5 @@
 # Welcome!
 
-<img src="https://scontent.ftpe8-2.fna.fbcdn.net/v/t1.0-9/14368921_1125150277570407_1824742152500673330_n.jpg?_nc_cat=101&_nc_ht=scontent.ftpe8-2.fna&oh=e6f1f2e739c6a9176f715dc6e4ac359e&oe=5CECC91E" alt="drawing" width="66%"/>
-
 Here is Sean's Personal Page
 
 ## Projects
