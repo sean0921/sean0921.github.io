@@ -1,6 +1,6 @@
 # Common Cuckoo (布穀鳥)
 
-* 看圖說故事: https://imgur.com/a/pCNEyCn (by: [三月的獅子 ep5](https://ani.gamer.com.tw/animeVideo.php?sn=6483) 20~21min)
+* 看圖說故事: https://imgur.com/a/pCNEyCn (by: [三月的獅子 ep5](https://ani.gamer.com.tw/animeVideo.php?sn=6483) 20~21min, 反白是相關劇透)
 * [BBC 紀錄片](https://www.youtube.com/watch?v=SO1WccH2_YM)
 
 ```
