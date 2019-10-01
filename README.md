@@ -1,5 +1,7 @@
 # Welcome!
 
+![](images/photo.jpg)
+
 ## Interests
 
 * FOSS (Free and Open Source Software) participation and news.
