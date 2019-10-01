@@ -1,6 +1,6 @@
 # Welcome!
 
-![](images/photo.jpg =50%x)
+<img src="images/photo.jpg" alt="I don't know what it is" height="50%"/>
 
 ## Interests
 
