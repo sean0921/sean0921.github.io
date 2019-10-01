@@ -1,6 +1,6 @@
 # Welcome!
 
-![](images/photo.jpg)
+![](images/photo.jpg =50%x)
 
 ## Interests
 
