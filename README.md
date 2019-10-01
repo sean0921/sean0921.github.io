@@ -31,3 +31,7 @@
 * [ctrain](https://github.com/sean0921/ctrain) : childish C programming test works.
 
 * [dotfile](https://github.com/sean0921/dotfile): my personal childish configuration file under Unix-Like platform 
+
+## Articles
+
+* [Common Cuckoo](articles/cuckoo), 2019/9/30
