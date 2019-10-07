@@ -2,38 +2,26 @@
 
 <img src="images/photo.jpg" alt="I don't know what it is" height="50%"/>
 
-## Interests
+## 測試過的
 
-* FOSS (Free and Open Source Software) participation and news.
-* FOSS desktop testing
-* Science Application/Tools Intergration (prefer FOSS)
-* Outdoor Application/Tools Intergration (prefer FOSS)
-* Amateur sysadmin related tools.
-* Internet culture and history research:
-  - [Bullitin Board System](https://zh.wikipedia.org/wiki/BBS) culture, development([MapleBBS](https://www.google.com/search?client=firefox-b-e&q=MapleBBS)) and history in Taiwan.
-* Simple musical score testing, for e.g., test [MuseScore](https://musescore.org)
+* [timeseries_process](https://github.com/sean0921/timeseries_process): 把 Fortran 古董用 [**GNU Build System**](https://en.wikipedia.org/wiki/GNU_Build_System) 打包並用 `gfortram` 開源編譯器重新編譯成跨平台程式。
 
-## Projects
+* [PyGG](https://github.com/sean0921/PyGG): 希望可以用圖形化界面(Gtk+函式庫、利用 PyGObject )產生 GMT 繪圖腳本，進一步是利用 GMT 的 Python API 來實現。(尚未實現)
 
-* [timeseries_process](https://github.com/sean0921/timeseries_process): Port traditional Fortran code to cross-platform environment with [**GNU Build System**](https://en.wikipedia.org/wiki/GNU_Build_System), and enhance some details.  Final aim is porting and rewriting in Python version.
+* [hello_gmt_docker](https://github.com/sean0921/hello_gmt_docker): 利用 Debian GNU/Linux 建立不同 GMT 版本的腳本執行環境
 
-* [PyGG](https://github.com/sean0921/PyGG): Designing PyGObject Program for Applying GMT 6(or later) Mapping Functions 
+* [gtk3-testing](https://github.com/sean0921/gtk3-testing): 大大都用 Qt 或 Visual C++ 在 Windows 開發 C++ 圖形界面，所以玩玩看 Gtk+ v3.x
 
-* [hello_gmt_docker](https://github.com/sean0921/hello_gmt_docker): Use Debian GNU/Linux as base image of Docker image.
+* [Earth Note](https://earthnote.github.io): 嗯...就相關筆記
 
-* [gtk3-testing](https://github.com/sean0921/gtk3-testing): Everyone uses Qt or VC++... to build GUI, but I just want to try this <s>GNOME
-'s</s> GTK ToolKit.
+* [TEQC shell script](https://github.com/sean0921/teqc_sh_script): 在 POSIX-Compatible Shell 下，執行 TEQC 轉檔指令，通常拿來轉 GPS 資料
 
-* [Earth Note](https://earthnote.github.io): Some simple personal notes about Earth Science
+* [docker-gipsy-centos7](https://github.com/sean0921/docker-gipsy-centos7): 在 Docker 底下裝 Gipsy (一種 GPS 解算軟體)，你覺得 CentOS 很棒，我覺得又老套件又少，那就包進 Docker 吧！
 
-* [TEQC shell script](https://github.com/sean0921/teqc_sh_script): simple scripts for simplify format-transfering works via TEQC and runpkr00 under general Unix-Like environment.
+* [ctrain](https://github.com/sean0921/ctrain) : 就...你們也會的
 
-* [docker-gipsy-centos7](https://github.com/sean0921/docker-gipsy-centos7): People like stable, even it is too OLD, so maybe docker is also a kind of work around solution.
+* [dotfile](https://github.com/sean0921/dotfile): 在 Unix-like 環境下的個人化設定腳本，包含 vim、bash、zsh、libinput-gesture (筆電觸控板神器)
 
-* [ctrain](https://github.com/sean0921/ctrain) : childish C programming test works.
+## 隨便寫的
 
-* [dotfile](https://github.com/sean0921/dotfile): my personal childish configuration file under Unix-Like platform 
-
-## Articles
-
-* [Common Cuckoo](articles/cuckoo), 2019/9/30
+* [布穀鳥](articles/cuckoo): 應有文學性的暴力兇宅要求寫的文章
