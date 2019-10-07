@@ -4,7 +4,7 @@
 
 ## 測試過的
 
-* [timeseries_process](https://github.com/sean0921/timeseries_process): 把 Fortran 古董用 [**GNU Build System**](https://en.wikipedia.org/wiki/GNU_Build_System) 打包並用 `gfortran` 開源編譯器重新編譯成跨平台程式。
+* [timeseries_process](https://github.com/sean0921/timeseries_process): 把 Fortran 古董用 [**GNU Build System**](https://en.wikipedia.org/wiki/GNU_Build_System) 打包並用 `gfortran` 開源編譯器重新編譯成跨平台程式。以研究之名研究如何使用 GNU Autotools 這個還不錯用的工具，雖然 CMake 感覺也很厲害(之後再說)，以及如何在 Linux 下輕鬆編譯你們常在 Windows 上看到的「綠色軟體」
 
 * [PyGG](https://github.com/sean0921/PyGG): 希望可以用圖形化界面(Gtk+函式庫、利用 PyGObject )產生 GMT 繪圖腳本，進一步是利用 GMT 的 Python API 來實現。(尚未實現)
 
