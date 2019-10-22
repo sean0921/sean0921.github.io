@@ -26,6 +26,8 @@
 
 * [dotfile](https://github.com/sean0921/dotfile): 在 Unix-like 環境下的個人化設定腳本，包含 vim、bash、zsh、libinput-gesture (筆電觸控板神器)。
 
+* **NEW** [FFmpeg-static](http://myweb.ncku.edu.tw/~c44046040/ffmpeg-static/): 跨平台影片抓取轉檔神器，學會用它和 [youtube-dl](https://yt-dl.org) 從此抓影片不求人，也不需要冒風險去使用不明第三方惡意網站！
+
 ## 隨便寫的
 
 * [布穀鳥](articles/cuckoo): 應有文學性的暴力兇宅要求寫的文章。
