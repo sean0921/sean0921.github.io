@@ -28,6 +28,8 @@
 
 * **\*\*NEW!!\*\*** [FFmpeg-static](http://myweb.ncku.edu.tw/~c44046040/ffmpeg-static/): 跨平台影片抓取轉檔神器，學會用它和 [youtube-dl](https://yt-dl.org) 從此抓影片不求人，也不需要冒風險去使用不明第三方惡意網站！
 
+* FreeBSD Jail: 不想只會跟風用 Docker 嗎? 你有另一個明智的選擇：FreeBSD Jail，它是比 Docker 更悠久，更有趣的容器化(Containerization)解決方案，除了能在 FreeBSD、FreeNAS 等 BSD-like 系統安裝不同版本的子系統外，甚至還能在上面安裝 Debian 9、CentOS 6~7 等 Linux 環境喔！ 當然也能跟後來 Linux 發行板跟風引進的 ZFS 完美結合呢！ 是個只要 \*BSD 系統就必須體驗的一大有趣賣點喔～ (相關紀錄敬請期待!)
+
 ## 隨便寫的
 
 * [布穀鳥](articles/cuckoo): 應有文學性的暴力兇宅要求寫的文章。
