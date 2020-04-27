@@ -33,3 +33,5 @@
 ## 隨便寫的
 
 * [布穀鳥](articles/cuckoo): 應有文學性的暴力兇宅要求寫的文章。
+
+* [OpenSSH on Win32](articles/openssh_win32.md): 在 Windows 7 或是 10 上使用遠端安全連線指令 `ssh` 與架設 OpenSSH 伺服器
