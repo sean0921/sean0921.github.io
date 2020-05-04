@@ -1,5 +1,7 @@
 # 口罩預購與健保卡讀卡機程式使用心得
 
+![](https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/95933650_2914052088680208_8915634799712927744_o.jpg?_nc_cat=109&_nc_sid=8024bb&_nc_ohc=GKkITlVsazUAX_quUwV&_nc_ht=scontent-tpe1-1.xx&oh=89f62070912c7ccf05924a4ff9a00441&oe=5ED6169D)
+
 1. 我知道便利商店可以直接插卡[預購口罩](https://www.nhi.gov.tw/Content_List.aspx?n=395F52D193F3B5C7)了，只是想說之前已經買的 **EZ100PU** 的讀卡機了不用浪費，所以還是想試試看在我平常用的作業系統上能不能用，故在本篇文章分享自己的使用心得
 
 2. 我目前使用的作業系統環境是 [ArchLinux](https://www.archlinux.org)，相關[套件](http://linux.vbird.org/linux_basic/0520rpm_and_srpm.php#intro)也都更新到最新狀態了，有興趣去瞭解的人自己應該就可以查到這個時間點相關套件的版本是什麼了
@@ -9,6 +11,8 @@
 4. 反而花比較多時間在設定瀏覽器憑證那邊，一開始只有按照 [官方安裝手冊](https://cloudicweb.nhi.gov.tw/cloudic/system/SMC/Document/%E5%81%A5%E4%BF%9D%E5%8D%A1%E5%85%83%E4%BB%B6_Linux(Ubuntu)%E5%AE%89%E8%A3%9D%E6%89%8B%E5%86%8A.pdf) 建議，把 `https://localhost:7777` (或是 `https://127.0.0.1:7777`，[一樣的東西](https://zh.wikipedia.org/wiki/Localhost) ) 加到例外，並把裝健保卡套件時，裡面附的根憑證 (Root CA) 安裝到瀏覽器 (我用 Firefox) 裡面。
 
 5. 進去官方給的測試頁面還是顯示讀不到覺得微挫折，而後憑著腦海中前人分享的心得去 [`/etc/hosts`](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ( [手動設定網域對應 ip 的檔案](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ，Windows 也有 `C:\WINDOWS\system32\drivers\etc\hosts` 這個東西 ) 翻翻看內容，果然健保卡元件有加一行 `127.0.0.1       iccert.nhi.gov.tw` ，也就是說我在輸入 `https://iccert.nhi.gov.tw:7777`，我會藉此連線到「自己電腦」( `127.0.0.1` ) 的 port 7777 進行加密連線，但瀏覽器基於安全考量只認網域不認 ip ，因此驗證網頁要求連線過去的 `https://iccert.nhi.gov.tw:7777` 還是被瀏覽器當作不安全的連線而擋下來。 
+
+![](https://i.imgur.com/Z9l6UHG.png)
 
 6. 於是我再開瀏覽器去 `https://iccert.nhi.gov.tw:7777` 把警告消掉後加到安全例外，問題就解決了
 
