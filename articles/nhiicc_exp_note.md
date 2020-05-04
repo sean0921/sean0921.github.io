@@ -1,6 +1,6 @@
 # 口罩預購與健保卡讀卡機程式使用心得
 
-![](https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/95933650_2914052088680208_8915634799712927744_o.jpg?_nc_cat=109&_nc_sid=8024bb&_nc_ohc=GKkITlVsazUAX_quUwV&_nc_ht=scontent-tpe1-1.xx&oh=89f62070912c7ccf05924a4ff9a00441&oe=5ED6169D)
+![](https://i.imgur.com/k5XQyYM.jpg)
 
 1. 我知道便利商店可以直接插卡[預購口罩](https://www.nhi.gov.tw/Content_List.aspx?n=395F52D193F3B5C7)了，只是想說之前已經買的 **EZ100PU** 的讀卡機了不用浪費，所以還是想試試看在我平常用的作業系統上能不能用，故在本篇文章分享自己的使用心得
 
