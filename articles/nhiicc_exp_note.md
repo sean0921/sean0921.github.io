@@ -10,7 +10,7 @@
 
 4. 反而花比較多時間在設定瀏覽器憑證那邊，一開始只有按照 [官方安裝手冊](https://cloudicweb.nhi.gov.tw/cloudic/system/SMC/Document/%E5%81%A5%E4%BF%9D%E5%8D%A1%E5%85%83%E4%BB%B6_Linux(Ubuntu)%E5%AE%89%E8%A3%9D%E6%89%8B%E5%86%8A.pdf) 建議，把 `https://localhost:7777` (或是 `https://127.0.0.1:7777`，[一樣的東西](https://zh.wikipedia.org/wiki/Localhost) ) 加到例外，並把裝健保卡套件時，裡面附的根憑證 (Root CA) 安裝到瀏覽器 (我用 Firefox) 裡面。
 
-5. 進去官方給的測試頁面還是顯示讀不到覺得微挫折，而後憑著腦海中前人分享的心得去 [`/etc/hosts`](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ( [手動設定網域對應 ip 的檔案](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ，Windows 也有 `C:\WINDOWS\system32\drivers\etc\hosts` 這個東西 ) 翻翻看內容，果然健保卡元件有加一行 `127.0.0.1       iccert.nhi.gov.tw` ，也就是說我在輸入 `https://iccert.nhi.gov.tw:7777`，我會藉此連線到「自己電腦」( `127.0.0.1` ) 的 port 7777 進行加密連線，但瀏覽器基於安全考量只認網域不認 ip ，因此驗證網頁要求連線過去的 `https://iccert.nhi.gov.tw:7777` 還是被瀏覽器當作不安全的連線而擋下來。  ![](https://i.imgur.com/Z9l6UHG.png)
+5. 進去官方給的測試頁面還是顯示讀不到覺得微挫折，而後憑著腦海中前人分享的心得去 [`/etc/hosts`](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ( [手動設定網域對應 ip 的檔案](https://zh.wikipedia.org/zh-tw/Hosts%E6%96%87%E4%BB%B6) ，Windows 也有 `C:\WINDOWS\system32\drivers\etc\hosts` 這個東西 ) 翻翻看內容，果然健保卡元件有加一行 `127.0.0.1       iccert.nhi.gov.tw` ，也就是說我在輸入 `https://iccert.nhi.gov.tw:7777`，我會藉此連線到「自己電腦」( `127.0.0.1` ) 的 port 7777 進行加密連線，但瀏覽器基於安全考量會希望憑證對應的「網域」及「ip 位置」必須都要一樣 ，因此驗證網頁要求連線過去的 `https://iccert.nhi.gov.tw:7777` 還是被瀏覽器當作不安全的連線而擋下來。  ![](https://i.imgur.com/Z9l6UHG.png)
 
 6. 於是我再開瀏覽器去 `https://iccert.nhi.gov.tw:7777` 把警告消掉後加到安全例外，問題就解決了
 
