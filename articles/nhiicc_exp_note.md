@@ -4,7 +4,7 @@
 
 2. 我目前使用的作業系統環境是 [ArchLinux](https://www.archlinux.org)，相關[套件](http://linux.vbird.org/linux_basic/0520rpm_and_srpm.php#intro)也都更新到最新狀態了，有興趣去瞭解的人自己應該就可以查到這個時間點相關套件的版本是什麼了
 
-3. 在 [Linux](https://zh.wikipedia.org/wiki/Linux) 核心的作業系統上，健保卡 + EZ100PU 讀卡機驅動安裝過程，雖然沒有點幾下滑鼠就能裝好那樣方便，但在 Arch Linux 上用第三方套件管理員(例: [`yay`](https://github.com/Jguer/yay)) 打幾行指令就能完成安裝，並利用 [`systemd`](http://linux.vbird.org/linux_basic/0560daemons.php#daemon) 這管理工具來啟動服務(類似去 Windows 工作管理員把服務開起來)，來取代官方手冊裡的繁瑣且讓使用者難以在未來解除安裝的步驟，裝起來還是比預期的順手一些。
+3. 在 [Linux](https://zh.wikipedia.org/wiki/Linux) 核心的作業系統上，健保卡 + EZ100PU 讀卡機驅動安裝過程，雖然沒有點幾下滑鼠就能裝好那樣方便，但在 Arch Linux 上用第三方套件管理員(例: [`yay`](https://github.com/Jguer/yay)) 打幾行指令就能完成安裝，並利用 [`systemd`](http://linux.vbird.org/linux_basic/0560daemons.php#daemon) 這管理工具來啟動服務(類似去 Windows 工作管理員把服務開起來)，來取代 [官方安裝手冊](https://cloudicweb.nhi.gov.tw/cloudic/system/SMC/Document/%E5%81%A5%E4%BF%9D%E5%8D%A1%E5%85%83%E4%BB%B6_Linux(Ubuntu)%E5%AE%89%E8%A3%9D%E6%89%8B%E5%86%8A.pdf) 裡的繁瑣且讓使用者難以在未來解除安裝的步驟，裝起來還是比預期的順手一些。
 
 4. 反而花比較多時間在設定瀏覽器憑證那邊，一開始只有按照 [官方安裝手冊](https://cloudicweb.nhi.gov.tw/cloudic/system/SMC/Document/%E5%81%A5%E4%BF%9D%E5%8D%A1%E5%85%83%E4%BB%B6_Linux(Ubuntu)%E5%AE%89%E8%A3%9D%E6%89%8B%E5%86%8A.pdf) 建議，把 `https://localhost:7777` (或是 `https://127.0.0.1:7777`，[一樣的東西](https://zh.wikipedia.org/wiki/Localhost) ) 加到例外，並把裝健保卡套件時，裡面附的根憑證 (Root CA) 安裝到瀏覽器 (我用 Firefox) 裡面。
 
@@ -12,7 +12,7 @@
 
 6. 於是我再開瀏覽器去 `https://iccert.nhi.gov.tw:7777` 把警告消掉後加到安全例外，問題就解決了
 
-7. 安裝部分能給的建議就是廠商有心開發給 Linux 用的驅動值得鼓勵，但希望往後打包的部分也能花點心思整理，至少讓 Ubuntu 的使用者可以用 `sudo apt install ./nhiicc-20200319-1.deb` 之類的方式一次安裝+設定的步驟也好 (其他發行版就看有沒有好心人士要順手包一下吧) ，節省更多使用者安裝與設定的時間。
+7. 安裝部分能給的建議就是廠商有心開發給 Linux 用的驅動值得鼓勵，但希望往後打包的部分也能花點心思整理，至少讓 [Ubuntu](https://zh.wikipedia.org/zh-tw/Ubuntu) 的使用者可以用 `sudo apt install ./nhiicc-20200319-1.deb` 之類的方式一次安裝+設定的步驟也好 (其他 [發行版](https://zh.wikipedia.org/zh-tw/Linux%E5%8F%91%E8%A1%8C%E7%89%88) 就看有沒有好心人士要順手包一下吧) ，節省更多使用者安裝與設定的時間。
 
 8. 憑證手動增加「安全例外」的感想是....手動設定開自己機器的 port 7777 的服務，還要特別跟自己說「這是安全的服務」，這樣真的沒問題嗎? 只能不負責任希望更好的解決方案吧，而且在 Windows 平臺上似乎也是這樣搞的呢。
 
