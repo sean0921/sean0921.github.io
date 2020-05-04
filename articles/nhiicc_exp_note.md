@@ -1,8 +1,8 @@
 # 口罩預購與健保卡讀卡機程式使用心得
 
-0. 很久以前就有耳聞電腦健保卡/自然人憑證讀卡機的安裝元件有一些詭異的操作機制了，只是這次藉由預購口罩的機會實地體驗 ![](https://i.imgur.com/k5XQyYM.jpg)
+0. 很久以前就有耳聞電腦健保卡/自然人憑證讀卡機的安裝元件有一些詭異的操作機制了，所以這次藉由預購口罩的機會實地體驗 ![](https://i.imgur.com/k5XQyYM.jpg)
 
-1. 我知道便利商店可以直接插卡[預購口罩](https://www.nhi.gov.tw/Content_List.aspx?n=395F52D193F3B5C7)了，只是想說之前已經買的 **EZ100PU** 的讀卡機了不用浪費，所以還是想試試看在我平常用的作業系統上能不能用，故在本篇文章分享自己的使用心得
+1. 便利商店可以直接插卡[預購口罩](https://www.nhi.gov.tw/Content_List.aspx?n=395F52D193F3B5C7)了，但之前已經買的 **EZ100PU** 的讀卡機了不用浪費，這也是使用動機之一
 
 2. 我目前使用的作業系統環境是 [ArchLinux](https://www.archlinux.org)，相關[套件](http://linux.vbird.org/linux_basic/0520rpm_and_srpm.php#intro)也都更新到最新狀態了，有興趣去瞭解的人自己應該就可以查到這個時間點相關套件的版本是什麼了
 
