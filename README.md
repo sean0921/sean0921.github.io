@@ -22,4 +22,6 @@
 
 * [口罩預購與健保卡讀卡機程式使用心得](articles/nhiicc_exp_note.md): 記錄自己在開源作業系統上實測讀卡機驅動是否能運作的心得，以健保卡讀卡機元件在口罩預購上的應用為例。
 
+* [在 Debian/Ubuntu 等 Linux 發行版下打包 SAC](articles/sac_debian_packaging.md): 這篇文章以地震學的 SAC ([Seismic Analysis Code](http://ds.iris.edu/ds/nodes/dmc/software/downloads/sac/)) 安裝為實例，說明 Linux 等環境下善用套件管理工具的重要性，以及可以幫我們節省多少容易出錯且重複的工作。
+
 * FreeBSD Jail: 不想只會跟風用 Docker 嗎? 你有另一個明智的選擇：FreeBSD Jail，它是比 Docker 更悠久，更有趣的容器化(Containerization)解決方案，除了能在 FreeBSD、FreeNAS 等 BSD-like 系統安裝不同版本的子系統外，甚至還能在上面安裝 Debian 9、CentOS 6~7 等 Linux 環境喔！ 當然也能跟後來 Linux 發行板跟風引進的 ZFS 完美結合呢！ 是個只要 \*BSD 系統就必須體驗的一大有趣賣點喔～ (相關紀錄敬請期待!)
