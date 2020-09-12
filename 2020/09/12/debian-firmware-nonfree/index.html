@@ -22,21 +22,25 @@
     var CONFIG = {"hostname":"sean0921.github.io","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
+  <meta name="description" content="每次在 Debian Stable 想裝 backports 的 kernel (通常版本是次新釋出的穩定分支) 遇到了缺某些韌體的訊息 雖然看不出來系統會因此發生什麼問題，還是記一下更新的方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenSSH on Windows 7&#x2F;10">
-<meta property="og:url" content="http://sean0921.github.io/2020/04/27/openssh-win10/index.html">
+<meta property="og:title" content="Debian 最新版 nonfree 韌體安裝筆記">
+<meta property="og:url" content="http://sean0921.github.io/2020/09/12/debian-firmware-nonfree/index.html">
 <meta property="og:site_name" content="Sean&#39;s Blog">
-<meta property="og:description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
+<meta property="og:description" content="每次在 Debian Stable 想裝 backports 的 kernel (通常版本是次新釋出的穩定分支) 遇到了缺某些韌體的訊息 雖然看不出來系統會因此發生什麼問題，還是記一下更新的方式">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-04-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-12T08:40:15.155Z">
+<meta property="article:published_time" content="2020-09-12T08:15:44.000Z">
+<meta property="article:modified_time" content="2020-09-12T08:41:01.902Z">
 <meta property="article:author" content="Sean Ho">
+<meta property="article:tag" content="debian">
+<meta property="article:tag" content="firmware">
+<meta property="article:tag" content="packaging">
+<meta property="article:tag" content="salsa">
 <meta property="article:tag" content="sysadmin">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://sean0921.github.io/2020/04/27/openssh-win10/">
+<link rel="canonical" href="http://sean0921.github.io/2020/09/12/debian-firmware-nonfree/">
 
 
 <script class="page-configurations">
@@ -49,7 +53,7 @@
   };
 </script>
 
-  <title>OpenSSH on Windows 7/10 | Sean's Blog</title>
+  <title>Debian 最新版 nonfree 韌體安裝筆記 | Sean's Blog</title>
   
 
 
@@ -150,7 +154,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-%E5%AE%89%E8%A3%9D"><span class="nav-number">1.</span> <span class="nav-text">Client 安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">Server 安裝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%BF%E6%A0%A1"><span class="nav-number"></span> <span class="nav-text">調校</span></a></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">1.</span> <span class="nav-text">結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Note"><span class="nav-number">1.1.</span> <span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -204,7 +208,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/04/27/openssh-win10/">
+    <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/09/12/debian-firmware-nonfree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -220,7 +224,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OpenSSH on Windows 7/10
+          Debian 最新版 nonfree 韌體安裝筆記
         </h1>
 
         <div class="post-meta-container">
@@ -230,16 +234,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2020-04-27 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-27T00:00:00+08:00">2020-04-27</time>
+      <time title="Created: 2020-09-12 16:15:44 / Modified: 16:41:01" itemprop="dateCreated datePublished" datetime="2020-09-12T16:15:44+08:00">2020-09-12</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-12 16:40:15" itemprop="dateModified" datetime="2020-09-12T16:40:15+08:00">2020-09-12</time>
-      </span>
 
   
 </div>
@@ -251,23 +249,46 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7</p>
-<p>如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版</p>
+        <p>每次在 Debian Stable 想裝 <a target="_blank" rel="noopener" href="https://backports.debian.org/">backports</a> 的 <a target="_blank" rel="noopener" href="https://kernel.org/">kernel</a> (通常版本是次新釋出的穩定分支) 遇到了缺某些韌體的訊息</p>
+<p>雖然看不出來系統會因此發生什麼問題，還是記一下更新的方式</p>
 <a id="more"></a>
 
+<p>首先要用 <code>apt</code> 先安裝 <code>linux-support-&lt;kernel version&gt;</code> 套件</p>
+<p>以及: [^1]</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH">OpenSSH-Win32 GitHub 入口頁面</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/openssh-portable">OpenSSH-Win32 source code</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/releases">OpenSSH-Win32 執行檔載點</a></li>
+<li><code>git</code> (要從 <a target="_blank" rel="noopener" href="https://salsa.debian.org/">Debian Salsa</a> 抓 repo)</li>
+<li><code>build-essential</code></li>
+<li><code>fakeroot</code> </li>
+<li><code>devscripts</code> (利用 debhelper 建標準 Debian 套件)</li>
 </ul>
-<p>首先要先去設定那邊關閉 OpenSSH 功能，這樣系統才不會先讀到 System32 那邊的 OpenSSH</p>
-<h2 id="Client-安裝"><a href="#Client-安裝" class="headerlink" title="Client 安裝"></a>Client 安裝</h2><p>把解壓縮的 OpenSSH 放在 Program Files 底下，加進系統 <code>PATH</code></p>
-<h2 id="Server-安裝"><a href="#Server-安裝" class="headerlink" title="Server 安裝"></a>Server 安裝</h2><p>參考 <a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH">GitHub wiki 頁面</a></p>
-<p>收工！</p>
-<h1 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h1><ul>
-<li><code>sshd_config</code> 位置： <code>C:\ProgramData\ssh</code>，可以改 ssh port，限制登入的使用者等進階安全設定</li>
-<li>理論上可以改 ssh 進去的 shell (預設是 cmd)</li>
-</ul>
+<p>然後</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://salsa.debian.org/kernel-team/firmware-nonfree.git \</span><br><span class="line">          /path/to/workdir/debian_firmware_nonfree/firmware-nonfree</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /path/to/workdir/debian_firmware_nonfree/firmware-nonfree  <span class="comment">#自己改路徑</span></span><br></pre></td></tr></table></figure>
+
+<p>再 <code>git clone</code> <a target="_blank" rel="noopener" href="https://kernel.org/">kernel.org</a> 維護的 <code>linux-firmware</code> 專案:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git \</span><br><span class="line">          /path/to/workdir/debian_firmware_nonfree/linux-firmware</span><br></pre></td></tr></table></figure>
+
+<p>進去 <code>/path/to/workdir/debian_firmware_nonfree/firmware-nonfree</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PYTHONPATH=/usr/share/linux-support-&lt;kernel version&gt;/lib/python debian/rules \</span><br><span class="line">debian/control   <span class="comment">#自己改 kernel 版本</span></span><br></pre></td></tr></table></figure>
+
+<p>或是改 <code>debian/rule.defs</code> 確認自己的 kernel 版號對不對後，<code>debian/rules debian/control</code><br>(通常不對，因為沒有 debian 後綴版號)</p>
+<p>然後</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PYTHONPATH=/usr/share/linux-support-&lt;kernel version&gt;/lib/python \</span><br><span class="line">            debian/bin/release-update \</span><br><span class="line">            /path/to/workdir/debian_firmware_nonfree/linux-firmware</span><br></pre></td></tr></table></figure>
+
+<p>然後忘記會不會幫你解包了</p>
+<p>之後就把 <code>debian/</code> 目錄放到解好的地方 或是在有放 <code>debian/</code> 的目錄解包解過去</p>
+<p>然後就照常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mk-build-deps debian/control  <span class="comment">## 通常東西都裝完了，不會裝新的東西</span></span><br><span class="line">debuild -b -us -uc  <span class="comment">## 就叫 debhelper 系列的工具幫你把套件生出來</span></span><br></pre></td></tr></table></figure>
+
+<p>然後再往上層目錄找包好的套件</p>
+<p>然後再選你要裝的 linux 韌體 sudo apt install ./&lt;套件名稱&gt;.deb</p>
+<p>完工！ 重開機</p>
+<p>通常應該不會出事…. 吧…</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>Debian Salsa 和 Debian backports 都是很好用的東西，嫌 Debian 太舊的人都該先試試這些東西並且嘗試 Bug Report 看 Maintainer 態度再來評論好壞。</p>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>說到這個想到有時在裝完 backport kernel 時且把 <code>quiet splash</code> 關掉之後</p>
+<p>就會在 systemd 訊息看到 <code>networking.service</code> 跟 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/NetworkManager"><code>NetworkManager.service</code></a> 打架的訊息<br>(<code>networking.service</code> 本質上還是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Init">SysV init</a> 的東西只是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Systemd">systemd</a> 向下相容它)</p>
+<p>這時都是選擇留 <code>NetworkManager</code> 砍 <code>networking</code> 相關的 script 套件</p>
+<p>做完之後確定 <code>NetworkManager</code> 有在做事就搞定了</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p>[^1] <a target="_blank" rel="noopener" href="https://wiki.debian.org/BuildingTutorial">https://wiki.debian.org/BuildingTutorial</a></p>
 
     </div>
 
@@ -277,6 +298,10 @@
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/debian/" rel="tag"># debian</a>
+              <a href="/tags/firmware/" rel="tag"># firmware</a>
+              <a href="/tags/packaging/" rel="tag"># packaging</a>
+              <a href="/tags/salsa/" rel="tag"># salsa</a>
               <a href="/tags/sysadmin/" rel="tag"># sysadmin</a>
           </div>
 
@@ -284,14 +309,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2019/10/07/cuckoo/" rel="prev" title="布穀鳥">
-                  <i class="fa fa-chevron-left"></i> 布穀鳥
+                <a href="/2020/05/05/nhiicc-exp-note/" rel="prev" title="口罩預購與健保卡讀卡機程式使用心得">
+                  <i class="fa fa-chevron-left"></i> 口罩預購與健保卡讀卡機程式使用心得
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/05/05/nhiicc-exp-note/" rel="next" title="口罩預購與健保卡讀卡機程式使用心得">
-                  口罩預購與健保卡讀卡機程式使用心得 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
