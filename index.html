@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-tw,en,default">
+<html lang="zh-tw">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -14,15 +16,14 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"sean0921.github.io","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-
-  <meta name="description" content="New Blog site construted by Hexo (nodejs package)">
+<meta name="description" content="New Blog site construted by Hexo (nodejs package)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sean&#39;s Blog">
 <meta property="og:url" content="http://sean0921.github.io/index.html">
@@ -46,11 +47,8 @@
     lang   : 'zh-tw'
   };
 </script>
-
-  <title>Sean's Blog</title>
+<title>Sean's Blog</title>
   
-
-
 
 
 
@@ -101,7 +99,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
   </div>
 
@@ -130,7 +128,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -148,17 +146,18 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Ho</p>
   <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
@@ -175,7 +174,8 @@
 
 
 
-      </section>
+        </div>
+      </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -184,7 +184,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -195,13 +195,15 @@
 
 
     <div class="main-inner index posts-expand">
-      
 
-      
-      
+    
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2021/01/03/2020-pixel-soul-movie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,13 +215,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/03/2020-pixel-soul-movie/" class="post-title-link" itemprop="url">靈魂急轉彎(Soul)觀後簡短感</a>
+          <a href="/2021/01/03/2020-pixel-soul-movie/" class="post-title-link" itemprop="url">靈魂急轉彎(Soul)觀後簡短感</a>
         </h2>
 
         <div class="post-meta-container">
@@ -229,10 +227,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-01-03 01:41:04 / Modified: 01:45:01" itemprop="dateCreated datePublished" datetime="2021-01-03T01:41:04+08:00">2021-01-03</time>
+      <time title="Created: 2021-01-03 01:41:04" itemprop="dateCreated datePublished" datetime="2021-01-03T01:41:04+08:00">2021-01-03</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-01-05 17:14:18" itemprop="dateModified" datetime="2021-01-05T17:14:18+08:00">2021-01-05</time>
+      </span>
 
   
 </div>
@@ -266,14 +270,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/12/10/centos-stream-replace-centos-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -285,13 +294,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/10/centos-stream-replace-centos-8/" class="post-title-link" itemprop="url">CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?</a>
+          <a href="/2020/12/10/centos-stream-replace-centos-8/" class="post-title-link" itemprop="url">CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?</a>
         </h2>
 
         <div class="post-meta-container">
@@ -301,16 +306,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2020-12-10 01:04:27" itemprop="dateCreated datePublished" datetime="2020-12-10T01:04:27+08:00">2020-12-10</time>
+      <time title="Created: 2020-12-10 01:04:27 / Modified: 02:05:09" itemprop="dateCreated datePublished" datetime="2020-12-10T01:04:27+08:00">2020-12-10</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-01-03 00:05:40" itemprop="dateModified" datetime="2021-01-03T00:05:40+08:00">2021-01-03</time>
-      </span>
 
   
 </div>
@@ -346,14 +345,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/12/04/replace-gsview-with-wsl-gv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -365,13 +369,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/04/replace-gsview-with-wsl-gv/" class="post-title-link" itemprop="url">使用 WSL/WSL2 的 gv 取代過時的 gsview</a>
+          <a href="/2020/12/04/replace-gsview-with-wsl-gv/" class="post-title-link" itemprop="url">使用 WSL/WSL2 的 gv 取代過時的 gsview</a>
         </h2>
 
         <div class="post-meta-container">
@@ -381,16 +381,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2020-12-04 12:24:08" itemprop="dateCreated datePublished" datetime="2020-12-04T12:24:08+08:00">2020-12-04</time>
+      <time title="Created: 2020-12-04 12:24:08 / Modified: 12:35:03" itemprop="dateCreated datePublished" datetime="2020-12-04T12:24:08+08:00">2020-12-04</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-12-05 15:11:48" itemprop="dateModified" datetime="2020-12-05T15:11:48+08:00">2020-12-05</time>
-      </span>
 
   
 </div>
@@ -423,14 +417,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/10/09/violet-evergarden-movie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -442,13 +441,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/09/violet-evergarden-movie/" class="post-title-link" itemprop="url">Violet Evergarden 劇場版心得</a>
+          <a href="/2020/10/09/violet-evergarden-movie/" class="post-title-link" itemprop="url">Violet Evergarden 劇場版心得</a>
         </h2>
 
         <div class="post-meta-container">
@@ -466,7 +461,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-10 00:20:59" itemprop="dateModified" datetime="2020-10-10T00:20:59+08:00">2020-10-10</time>
+        <time title="Modified: 2020-12-04 11:45:09" itemprop="dateModified" datetime="2020-12-04T11:45:09+08:00">2020-12-04</time>
       </span>
 
   
@@ -503,14 +498,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/09/13/folding-at-home/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -522,13 +522,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/13/folding-at-home/" class="post-title-link" itemprop="url">Folding@Home 試用心得</a>
+          <a href="/2020/09/13/folding-at-home/" class="post-title-link" itemprop="url">Folding@Home 試用心得</a>
         </h2>
 
         <div class="post-meta-container">
@@ -538,10 +534,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-09-13 12:33:19 / Modified: 12:42:04" itemprop="dateCreated datePublished" datetime="2020-09-13T12:33:19+08:00">2020-09-13</time>
+      <time title="Created: 2020-09-13 12:33:19" itemprop="dateCreated datePublished" datetime="2020-09-13T12:33:19+08:00">2020-09-13</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-09-19 17:54:29" itemprop="dateModified" datetime="2020-09-19T17:54:29+08:00">2020-09-19</time>
+      </span>
 
   
 </div>
@@ -575,14 +577,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/09/12/debian-firmware-nonfree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -594,13 +601,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/12/debian-firmware-nonfree/" class="post-title-link" itemprop="url">Debian 最新版 nonfree 韌體安裝筆記</a>
+          <a href="/2020/09/12/debian-firmware-nonfree/" class="post-title-link" itemprop="url">Debian 最新版 nonfree 韌體安裝筆記</a>
         </h2>
 
         <div class="post-meta-container">
@@ -618,7 +621,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-04 17:16:08" itemprop="dateModified" datetime="2020-10-04T17:16:08+08:00">2020-10-04</time>
+        <time title="Modified: 2020-09-23 16:34:27" itemprop="dateModified" datetime="2020-09-23T16:34:27+08:00">2020-09-23</time>
       </span>
 
   
@@ -652,14 +655,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/05/05/nhiicc-exp-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -671,13 +679,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nhiicc-exp-note/" class="post-title-link" itemprop="url">口罩預購與健保卡讀卡機程式使用心得</a>
+          <a href="/2020/05/05/nhiicc-exp-note/" class="post-title-link" itemprop="url">口罩預購與健保卡讀卡機程式使用心得</a>
         </h2>
 
         <div class="post-meta-container">
@@ -695,7 +699,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-12 16:41:12" itemprop="dateModified" datetime="2020-09-12T16:41:12+08:00">2020-09-12</time>
+        <time title="Modified: 2020-09-19 17:54:29" itemprop="dateModified" datetime="2020-09-19T17:54:29+08:00">2020-09-19</time>
       </span>
 
   
@@ -731,14 +735,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/04/27/openssh-win10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -750,13 +759,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/27/openssh-win10/" class="post-title-link" itemprop="url">OpenSSH on Windows 7/10</a>
+          <a href="/2020/04/27/openssh-win10/" class="post-title-link" itemprop="url">OpenSSH on Windows 7/10</a>
         </h2>
 
         <div class="post-meta-container">
@@ -774,7 +779,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-12 16:40:15" itemprop="dateModified" datetime="2020-09-12T16:40:15+08:00">2020-09-12</time>
+        <time title="Modified: 2020-09-19 17:54:29" itemprop="dateModified" datetime="2020-09-19T17:54:29+08:00">2020-09-19</time>
       </span>
 
   
@@ -809,14 +814,19 @@
       
     </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2019/10/07/cuckoo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -828,13 +838,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/07/cuckoo/" class="post-title-link" itemprop="url">布穀鳥</a>
+          <a href="/2019/10/07/cuckoo/" class="post-title-link" itemprop="url">布穀鳥</a>
         </h2>
 
         <div class="post-meta-container">
@@ -852,7 +858,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-09 23:39:21" itemprop="dateModified" datetime="2020-10-09T23:39:21+08:00">2020-10-09</time>
+        <time title="Modified: 2020-12-04 11:45:09" itemprop="dateModified" datetime="2020-12-04T11:45:09+08:00">2020-12-04</time>
       </span>
 
   
@@ -888,16 +894,12 @@
       
     </footer>
   </article>
-  
-  
-  
-
-
-  
+</div>
 
 
 
-      
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -920,18 +922,14 @@
     });
   }
 </script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
@@ -946,7 +944,7 @@
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
@@ -956,30 +954,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   
 
 
 
 
-
-
-
-
-  
-
-  
 
 </body>
 </html>
