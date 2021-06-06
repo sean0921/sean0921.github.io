@@ -24,16 +24,16 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「[通用作業系統]。我們將以地震學軟體 SAC 為例，說明如何利用「套件打包」的機制，藉由單一專案的軟體打包管理程式，使得發行版內軟體更能有秩序地被管理。">
+<meta name="description" content="我們常見到的 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 Debian&#x2F;Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例">
 <meta property="og:url" content="http://sean0921.github.io/2021/06/06/sac-debian-packaging/index.html">
 <meta property="og:site_name" content="Sean&#39;s Blog">
-<meta property="og:description" content="Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「[通用作業系統]。我們將以地震學軟體 SAC 為例，說明如何利用「套件打包」的機制，藉由單一專案的軟體打包管理程式，使得發行版內軟體更能有秩序地被管理。">
+<meta property="og:description" content="我們常見到的 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif">
 <meta property="article:published_time" content="2021-06-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-06T04:32:54.775Z">
+<meta property="article:modified_time" content="2021-06-06T05:00:11.001Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="seismology, linux, packaging, sysadmin">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-06 00:00:00 / Modified: 12:32:54" itemprop="dateCreated datePublished" datetime="2021-06-06T00:00:00+08:00">2021-06-06</time>
+      <time title="Created: 2021-06-06 00:00:00 / Modified: 13:00:11" itemprop="dateCreated datePublished" datetime="2021-06-06T00:00:00+08:00">2021-06-06</time>
     </span>
 
   
@@ -249,10 +249,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「[通用作業系統]。我們將以地震學軟體 SAC 為例，說明如何利用「套件打包」的機制，藉由單一專案的軟體打包管理程式，使得發行版內軟體更能有秩序地被管理。</p>
+        <p>我們常見到的 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。</p>
 <span id="more"></span>
 
-<h2 id="套件打包的目的"><a href="#套件打包的目的" class="headerlink" title="套件打包的目的"></a>套件打包的目的</h2><p>我們知道 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F#%E9%80%9A%E7%94%A8%E4%B8%8E%E4%B8%93%E7%94%A8%E3%80%81%E5%B5%8C%E5%85%A5%E5%BC%8F">通用作業系統</a>」。通常發行版的維護者會優先將符合<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E5%8F%8A%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BD%AF%E4%BB%B6">自由及開放原始碼授權</a>的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充足下會在安裝期間提供授權不相容(如: Nvidia 驅動、OpenZFS 核心模組)的元件以增進使用者體驗。但在大部分情況下，只要是授權有疑慮或明定不開放散佈原始碼的軟體，在發行版整合上就是一個巨大的阻礙，因為這意味者我們無法透過社群合作的機制，讓更熟悉軟體開發部署工程的人檢視我們平常使用的程式是否是易於使用、沒有潛在問題的。</p>
+<h2 id="套件打包的目的"><a href="#套件打包的目的" class="headerlink" title="套件打包的目的"></a>套件打包的目的</h2><p>相對於 Windows、FreeBSD 作業系統都有官方維護的基礎元件(base component)，我們常見到的 Linux 發行版基本上就是一個全然的「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F#%E9%80%9A%E7%94%A8%E4%B8%8E%E4%B8%93%E7%94%A8%E3%80%81%E5%B5%8C%E5%85%A5%E5%BC%8F">通用作業系統</a>」。通常發行版的維護者會優先將符合<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E5%8F%8A%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BD%AF%E4%BB%B6">自由及開放原始碼授權</a>的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充足下會在安裝期間提供授權不相容(如: Nvidia 驅動、OpenZFS 核心模組)的元件以增進使用者體驗。但在大部分情況下，只要是授權有疑慮或明定不開放散佈原始碼的軟體，在發行版整合上就是一個巨大的阻礙，因為這意味者我們無法透過社群合作的機制，讓更熟悉軟體開發部署工程的人檢視我們平常使用的程式是否是易於使用、沒有潛在問題的。</p>
 <p>而我們在 Unix-like (Linux、FreeBSD、Solaris、更早期的 SunOS..等) 環境下，最早期藉由原始碼安裝軟體方式，就是進入原始碼資料夾。執行 <code>make</code> 將軟體編譯完成後，再使用 root 權限 <code>make install</code>，將軟體安裝到預設的路徑 ( <code>/usr/local</code> ) 下。但現在我們已經極度不建議安裝用這樣的方式在預設路徑( <code>/usr/local</code> )，因為容易跟其他也手動安裝在同位置的套件混淆，使得嘗試解除安裝的過程中容易誤刪手動 <code>make install</code> 安裝其他套件的檔案，讓升級或解除安裝套件更加複雜。更別說在「不重複安裝」的前提下，解決 A 函式庫一更新，以它為基礎的 B 專案就得重新編譯才能找到 A 以執行的常見問題了。</p>
 <p>因此我們開始使用了「套件打包」的機制，藉由單一專案的軟體打包管理程式(dpkg, rpm)，統一發行版內軟體管理的秩序。</p>
 <h2 id="使用情境-–-為什麼要「打包」SAC"><a href="#使用情境-–-為什麼要「打包」SAC" class="headerlink" title="使用情境 – 為什麼要「打包」SAC?"></a>使用情境 – 為什麼要「打包」SAC?</h2><p>SAC 全名是 Seismic Analysis Code，是個歷史悠久的地震學資料處理軟體，由美國的 IRIS (地震學研究機構聯合會) 團隊開發，主要使用 C 語言開發，需在相容 Unix-like (如 Linux, FreeBSD, Cygwin…等) 的 X 視窗系統下才能正常使用，並只提供相關原始碼、執行檔給非特殊國家之地震學相關人員。若需取得相關程式需至官方網站<a target="_blank" rel="noopener" href="https://ds.iris.edu/ds/nodes/dmc/forms/sac/">填寫申請表單</a>，由該單位人員審核後才可藉由 email 附件取得檔案。</p>
