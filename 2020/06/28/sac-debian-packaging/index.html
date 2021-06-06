@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="在 Debian&#x2F;Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例套件打包的目的我們知道 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「通用作業系統」。通常發行版的維護者會優先將符合自由及開放原始碼授權的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sac_debian_packaging">
+<meta property="og:url" content="http://sean0921.github.io/2020/06/28/sac-debian-packaging/index.html">
+<meta property="og:site_name" content="Sean&#39;s Blog">
+<meta property="og:description" content="在 Debian&#x2F;Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例套件打包的目的我們知道 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「通用作業系統」。通常發行版的維護者會優先將符合自由及開放原始碼授權的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif">
+<meta property="article:published_time" content="2020-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-06T04:23:49.845Z">
+<meta property="article:author" content="Sean Ho">
+<meta property="article:tag" content="seismology, linux, packaging, sysadmin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif">
+
+
+<link rel="canonical" href="http://sean0921.github.io/2020/06/28/sac-debian-packaging/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>sac_debian_packaging | Sean's Blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sean's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Sean's Blog" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Sean's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">less is more, old is new.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8-Debian-Ubuntu-%E7%AD%89-Linux-%E7%99%BC%E8%A1%8C%E7%89%88%E4%B8%8B%E7%B0%A1%E6%98%93%E6%89%93%E5%8C%85%E8%BB%9F%E9%AB%94-%E2%80%93-%E4%BB%A5-SAC-%E7%82%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">在 Debian&#x2F;Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">套件打包的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83-%E2%80%93-%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E3%80%8C%E6%89%93%E5%8C%85%E3%80%8DSAC"><span class="nav-number">1.2.</span> <span class="nav-text">使用情境 – 為什麼要「打包」SAC?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAC-Debian-Ubuntu-Packager-%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.3.</span> <span class="nav-text">SAC Debian&#x2F;Ubuntu Packager 介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">1.4.</span> <span class="nav-text">結論</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sean Ho</p>
+  <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2020/06/28/sac-debian-packaging/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Ho">
+      <meta itemprop="description" content="New Blog site construted by Hexo (nodejs package)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sac_debian_packaging
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-28T00:00:00+08:00">2020-06-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-06 12:23:49" itemprop="dateModified" datetime="2021-06-06T12:23:49+08:00">2021-06-06</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="在-Debian-Ubuntu-等-Linux-發行版下簡易打包軟體-–-以-SAC-為例"><a href="#在-Debian-Ubuntu-等-Linux-發行版下簡易打包軟體-–-以-SAC-為例" class="headerlink" title="在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例"></a>在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</h1><h2 id="套件打包的目的"><a href="#套件打包的目的" class="headerlink" title="套件打包的目的"></a>套件打包的目的</h2><p>我們知道 Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F#%E9%80%9A%E7%94%A8%E4%B8%8E%E4%B8%93%E7%94%A8%E3%80%81%E5%B5%8C%E5%85%A5%E5%BC%8F">通用作業系統</a>」。通常發行版的維護者會優先將符合<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E5%8F%8A%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BD%AF%E4%BB%B6">自由及開放原始碼授權</a>的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充足下會在安裝期間提供授權不相容(如: Nvidia 驅動、OpenZFS 核心模組)的元件以增進使用者體驗。但在大部分情況下，只要是授權有疑慮或明定不開放散佈原始碼的軟體，在發行版整合上就是一個巨大的阻礙，因為這意味者我們無法透過社群合作的機制，讓更熟悉軟體開發部署工程的人檢視我們平常使用的程式是否是易於使用、沒有潛在問題的。</p>
+<p>而我們在 Unix-like (Linux、FreeBSD、Solaris、更早期的 SunOS..等) 環境下，最早期藉由原始碼安裝軟體方式，就是進入原始碼資料夾。執行 <code>make</code> 將軟體編譯完成後，再使用 root 權限 <code>make install</code>，將軟體安裝到預設的路徑 ( <code>/usr/local</code> ) 下。但現在我們已經極度不建議安裝用這樣的方式在預設路徑( <code>/usr/local</code> )，因為容易跟其他也手動安裝在同位置的套件混淆，使得嘗試解除安裝的過程中容易誤刪手動 <code>make install</code> 安裝其他套件的檔案，讓升級或解除安裝套件更加複雜。更別說在「不重複安裝」的前提下，解決 A 函式庫一更新，以它為基礎的 B 專案就得重新編譯才能找到 A 以執行的常見問題了。</p>
+<p>因此我們開始使用了「套件打包」的機制，藉由單一專案的軟體打包管理程式(dpkg, rpm)，統一發行版內軟體管理的秩序。</p>
+<h2 id="使用情境-–-為什麼要「打包」SAC"><a href="#使用情境-–-為什麼要「打包」SAC" class="headerlink" title="使用情境 – 為什麼要「打包」SAC?"></a>使用情境 – 為什麼要「打包」SAC?</h2><p>SAC 全名是 Seismic Analysis Code，是個歷史悠久的地震學資料處理軟體，由美國的 IRIS (地震學研究機構聯合會) 團隊開發，主要使用 C 語言開發，需在相容 Unix-like (如 Linux, FreeBSD, Cygwin…等) 的 X 視窗系統下才能正常使用，並只提供相關原始碼、執行檔給非特殊國家之地震學相關人員。若需取得相關程式需至官方網站<a target="_blank" rel="noopener" href="https://ds.iris.edu/ds/nodes/dmc/forms/sac/">填寫申請表單</a>，由該單位人員審核後才可藉由 email 附件取得檔案。</p>
+<p>傳統而言，在同一作業系統環境下安裝 SAC 有兩種途徑，第一種是直接把 IRIS 提供的執行檔手動放到指定位置 ( Linux 下指定 <code>/usr/local</code> ) 後執行，第二種是在作業系統下自行使用 gcc 等編譯器建置後安裝到自行指定的位置 (若未指定則仍安裝到 <code>/usr/local</code> )</p>
+<p>第一種方法的方便之處在於說，不需要瞭解太多 Linux / Unix 的基礎知識與相關操作就可以藉由非常基本的指令 (cp, sudo…等) 完成安裝</p>
+<p>缺點在於只能安裝在 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/X86">x86</a>/<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/X86-64">x86_64</a> 平臺下的 CPU 才能順利執行的 Linux 執行檔，也就是說若你今天想在同樣安裝 Linux 的小型開發板 (如：樹梅派、Apple Silicon M1 上執行的虛擬機器)或是在官方沒考慮的 Unix-like 環境(Cygwin, FreeBSD, Termux)下執行是做不到的 (樹梅派或許可以在上面開 QEMU 模擬，但速度可預想是非常非常慢的)</p>
+<p>另外第一種方法也無法自行客製化相關功能，這限制的問題在於說用此方法安裝的 SAC 程式只能在極度有限的操作體驗下進行，而使得剛熟悉 bash 等指令介面的使用者進入 SAC 的指令介面會發現 TAB 自動補完、上下、結束時保留指令歷史、Ctrl+R 搜尋歷史等在 bash 有的功能這邊都沒有或限制更多。但如果客製化編譯就可以藉由增加相關選項就可以改善。</p>
+<p>因此我們知道如果藉由第二種方法有可修改安裝路徑、自行增減相關功能、移植更方便等優勢，但此方法對於沒有接觸過系統管理、程式開發的使用者挑戰並不小，且若想要提供給多個各自符合資格的人員，安裝一樣客製化設定同時符合易於安裝、升級、解除安裝原則的 SAC 程式也勢必會花費很多心力。此時發行版下的套件管理工具就是我們很重要的夥伴了! 在這邊我們將用 Debian/Ubuntu 下的 <code>apt</code> (<code>dpkg</code>) 工具來協助我們更輕易地部署「我們的 SAC」</p>
+<h2 id="SAC-Debian-Ubuntu-Packager-介紹"><a href="#SAC-Debian-Ubuntu-Packager-介紹" class="headerlink" title="SAC Debian/Ubuntu Packager 介紹"></a>SAC Debian/Ubuntu Packager 介紹</h2><p><img src="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif"></p>
+<p>這個工具使用最基本的 Shell Script 腳本，搭配 <code>dpkg</code> 程式，將編譯後的 SAC 程式放置在特定資料夾後，再加入軟體資訊後打包壓縮成單一安裝檔 (<code>&lt;pkg_name&gt;.deb</code>)，最後再由使用者從 <code>apt</code> 程式安裝該套件，納入發行版套件管理系統的記錄中。</p>
+<p>由以上討論我們可以歸納這個方法的好處：</p>
+<ol>
+<li>使得 SAC 更易於安裝、解除安裝、升級</li>
+<li>SAC 底層用到的函式庫一旦有重大升級，發行版套件管理程式（<code>apt</code>）會跳出相關警告，讓你記得要重新安裝程式。</li>
+<li>減少繁瑣的環境變數設定</li>
+</ol>
+<p>使用這個工具安裝 SAC 之前，符合相關資格的使用者仍需自行至 IRIS 網站申請下載原始碼，以遵守授權相關規範。詳細安裝方式請參考 <a target="_blank" rel="noopener" href="https://github.com/sean0921/sac_debian_packager">GitHub</a> 上的 README 頁面。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>套件打包適合用在一定數量的人會安裝的軟體上，以減少繁瑣安裝過程中可能會出錯的機率，以增進效率並兼顧使用體驗。也是讓 Linux 在有限硬碟空間下提供完整功能的關鍵。若有心在未來的專案上利用 Linux 環境作為開發測試平臺，這仍然是不可或缺的知識。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/seismology-linux-packaging-sysadmin/" rel="tag"># seismology, linux, packaging, sysadmin</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/05/nhiicc-exp-note/" rel="prev" title="口罩預購與健保卡讀卡機程式使用心得">
+                  <i class="fa fa-chevron-left"></i> 口罩預購與健保卡讀卡機程式使用心得
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/09/12/debian-firmware-nonfree/" rel="next" title="Debian 最新版 nonfree 韌體安裝筆記">
+                  Debian 最新版 nonfree 韌體安裝筆記 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-glass-cheers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sean Ho</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
