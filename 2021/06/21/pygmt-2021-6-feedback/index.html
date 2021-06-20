@@ -33,7 +33,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png">
 <meta property="article:published_time" content="2021-06-20T23:37:03.000Z">
-<meta property="article:modified_time" content="2021-06-20T23:37:03.899Z">
+<meta property="article:modified_time" content="2021-06-20T23:52:04.131Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="opensource">
 <meta property="article:tag" content="freesoftware">
@@ -239,8 +239,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-06-21 07:37:03" itemprop="dateCreated datePublished" datetime="2021-06-21T07:37:03+08:00">2021-06-21</time>
+      <time title="Created: 2021-06-21 07:37:03 / Modified: 07:52:04" itemprop="dateCreated datePublished" datetime="2021-06-21T07:37:03+08:00">2021-06-21</time>
     </span>
 
   
@@ -282,10 +283,11 @@
 <li>即使某些 GMT 模組能被 PyGMT 支援，但能使用的長選項參數、能夠讀取的資料格式仍相對受限</li>
 <li>開發/教學文件與範本數量仍極度缺乏，但此部分至少可以對照 GMT 指令版本的文件</li>
 </ol>
-<p>第 1,2 點的部分，以目前釋出的 0.3.1 版為例，該版本不支援、支援有限但常被使用的 GMT 指令模組包含了 <a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/project.html"><code>project</code></a> (對平面直線附近包含深度資訊的座標點進行剖面繪製)，<a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/pssac.html"><code>pssac</code></a> (讀取 SAC 檔並繪製地震波形)， <a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/histogram.html"><code>histogram</code></a> (繪製長條圖，目前已於 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Git">git</a> <code>master</code> 開發中版本開始支援)，<a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/meca.html"><code>meca</code></a> (舊稱 <code>psmeca</code>，已實作，但不支援震源機制球置放在震央以外的位置)…等</p>
+<p>第 1,2 點的部分，以目前釋出的 0.3.1 版為例，該版本不支援、支援有限但常被使用的 GMT 指令模組包含了 <a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/project.html"><code>project</code></a> (對平面直線附近包含深度資訊的座標點進行剖面繪製)，<a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/pssac.html"><code>pssac</code></a> (讀取 SAC 檔並繪製地震波形)， <a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/histogram.html"><code>histogram</code></a> (繪製長條圖，目前已於 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Git">git</a> <code>master</code> 開發中版本開始支援)，<a target="_blank" rel="noopener" href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/meca.html"><code>meca</code></a> (舊稱 <code>psmeca</code>，已實作，但不支援震源機制球置放在震央以外的位置)…等。</p>
+<p>即使 <code>pssac</code> 和 <code>histogram</code> 功能可分別用 <code>obspy</code> 和 <code>matplotlib</code> 替代，但使用介面上的差異，進而造成腳本轉換所要花費的時間，卻遠大於從 GMT 5,6 轉換到其他 PyGMT 支援的模組所要付出的。</p>
 <p>另外在傳統 GMT 繪圖的過程中，我們需要 <code>-V</code> 選項來讓程式輸出更多明顯的提示訊息以利除錯校正，在 PyGMT 中開發者嘗試使用 <code>verbose=True</code> 使其參數更容易被理解，但大量使用此選項後便會發現許多函式仍然只能使用 <code>V=True</code> 來應付其 alias 無法實作的問題。</p>
-<p>理論上來說上面所遇到的問題雖然會徒然花費使用者時間去想辦法應付這些問題，包含並不限於使用替代套件(<code>obspy</code> 簡單繪製地震波形，<code>matplotlib</code> 畫長條圖)、透過 <code>pygmt.clib.Session.call_module()</code> 暴力呼叫指令、回去使用 <code>subprocess</code>…等，其中用到 <code>subprocess</code> 來應付模組 <code>project</code> 不被 PyGMT 支援的問題時，已經開始思考當初使用這個套件的理由了。</p>
-<h2 id="PyGMT-還有搞頭嗎"><a href="#PyGMT-還有搞頭嗎" class="headerlink" title="PyGMT 還有搞頭嗎?"></a>PyGMT 還有搞頭嗎?</h2><p>身為開源軟體的使用者、推廣者而言，自己仍然是希望這個專案的開發能夠繼續下去。畢竟上面實際使用該套件後遇到的問題，多偏向開發、使用者社群尚未完整地建立起來的因素，再加上一般使用者多偏向從現有/舊有腳本去修改來繪製研究成果以節省時間，這也成為了推廣新工具(PyGMT，GMT 6 語法)、給予回饋的巨大阻礙。然而新需求、新方法總會不斷地出現，停留在舊版程式與腳本也遲早會遇到無法被新平臺、新工具支援的問題。如果我們持續停留在消耗別人既有成果而對於回饋開源專案這件事情不甚重視的話，未來能從它身上滿足的需求也將持續受限，無法跨出新的一步。</p>
+<p>上面所遇到的問題會徒然花費使用者時間去想辦法應付這些問題，進而大幅降低使用者嘗試的意願。包含並不限於使用替代套件、透過 <code>pygmt.clib.Session.call_module()</code> 呼叫 API、回去使用 <code>subprocess</code>…等，其中必須用到 <code>subprocess()</code> 及其 pipe 功能來應付模組 <code>project</code> 不被 PyGMT 支援的問題時，已經開始思考當初使用這個套件的理由了。</p>
+<h2 id="PyGMT-還有搞頭嗎"><a href="#PyGMT-還有搞頭嗎" class="headerlink" title="PyGMT 還有搞頭嗎?"></a>PyGMT 還有搞頭嗎?</h2><p>身為開源軟體的使用者、推廣者而言，仍然希望這個專案的開發能夠繼續下去。畢竟上面實際使用該套件後遇到的問題，多偏向開發、使用者社群尚未完整地建立起來的因素，再加上一般使用者多偏向從現有/舊有腳本去修改來繪製研究成果以節省時間，這也成為了推廣新工具(PyGMT，GMT 6 語法)、給予回饋的巨大阻礙。然而新需求、新方法總會不斷地出現，停留在舊版程式與腳本也遲早會遇到無法被新平臺、新工具支援的問題。如果我們持續停留在消耗別人既有成果而對於回饋開源專案這件事情不甚重視的話，未來能從它身上滿足的需求也將持續受限，無法跨出新的一步。</p>
 <p>其他能做的事情，或許可以列舉：</p>
 <ul>
 <li>整理以上支援受限的 module 資訊，包含其必要性 (是否優於替代方案)，回報給開發者社群。</li>
