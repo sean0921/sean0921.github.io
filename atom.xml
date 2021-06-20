@@ -6,7 +6,7 @@
   <link href="http://sean0921.github.io/atom.xml" rel="self"/>
   
   <link href="http://sean0921.github.io/"/>
-  <updated>2021-06-06T16:51:23.676Z</updated>
+  <updated>2021-06-20T23:37:03.899Z</updated>
   <id>http://sean0921.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?</title>
+    <link href="http://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/"/>
+    <id>http://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/</id>
+    <published>2021-06-20T23:37:03.000Z</published>
+    <updated>2021-06-20T23:37:03.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在 Python 的 API。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。</p><span id="more"></span><h2 id="GMT-與-PyGMT-介紹"><a href="#GMT-與-PyGMT-介紹" class="headerlink" title="GMT 與 PyGMT 介紹"></a>GMT 與 PyGMT 介紹</h2><p>Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT。於 1988 年釋出第一個 1.0 版本，並且受<a href="http://www.nsf.gov/">美國國家科學基金會 (NSF)</a>的贊助持續開發至今，在 2021 年 6 月 5 日已經釋出 6.2.0 版本，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。</p><p>GMT 團隊在 5.x 版釋出時，就已經積極投入應用程式介面(API)的開發，並陸續開發了 Fortran，MATLAB/Octave，Julia 等語言的 API。GMT 6.x 於 2019 年釋出後，於隔年 5 月便有了 GMT 在 Python 的 API，被命名為 PyGMT 專案。讓使用者能夠利用 Python 語法呼叫 PyGMT 提供的函式透過 GMT 的官方 API (而非透過 Shell 呼叫)進行製圖腳本的撰寫。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。</p><h2 id="PyGMT-潛在優勢"><a href="#PyGMT-潛在優勢" class="headerlink" title="PyGMT 潛在優勢"></a>PyGMT 潛在優勢</h2><p>以下先分享使用 PyGMT 的好處：</p><ol><li>可以更輕鬆地結合在 Python 更為強大的套件(<code>pandas</code>，<code>numpy</code>，<code>obspy</code>)進行科學數據的運算與結果製圖</li><li>避開對系統 Shell 的直接呼叫，以提升以 GMT 為基礎建構應用程式的安全性。(相對於很多人偷懶直接使用 <code>system()</code> 直接呼叫 <code>gmt</code> 指令)</li><li>在 PyGMT 函數內的參數名稱，會設計成一般人較容易理解的長參數名稱，相較於 GMT 在 shell 指令的選項以短參數為主，可讀性大幅提升</li></ol><p>關於參數名稱的部分，這邊引用並微幅修改 <a href="https://gmt-tutorials.org/making_first_map.html">GMT 教學手冊</a> 的範例作為對照。</p><p>預計出來的原圖如下：<br><img src="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png"></p><p>若使用 GMT 5 的語法在 Shell 進行製圖：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gmt pscoast \</span><br><span class="line">    -R19.42/22.95/59.71/60.56 \</span><br><span class="line">    -JM6i \</span><br><span class="line">    -W0.1p,black \</span><br><span class="line">    -Gdarkseagreen2 \</span><br><span class="line">    -Scornflowerblue \</span><br><span class="line">    -Df \</span><br><span class="line">    -P \</span><br><span class="line">    -Ba2f0.5g1 \</span><br><span class="line">    -BWSne+t<span class="string">&quot;Archipelago Sea&quot;</span> \</span><br><span class="line">    -A0.1 \</span><br><span class="line">    -U &gt; archi_sea.ps</span><br></pre></td></tr></table></figure><p>GMT 6 則是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gmt coast \</span><br><span class="line">    -R19.42/22.95/59.71/60.56 \</span><br><span class="line">    -JM6i \</span><br><span class="line">    -W0.1p,black \</span><br><span class="line">    -Gdarkseagreen2 \</span><br><span class="line">    -Scornflowerblue \</span><br><span class="line">    -Ba2f0.5g1 \</span><br><span class="line">    -BWSne+t<span class="string">&quot;Archipelago Sea&quot;</span> \</span><br><span class="line">    -A0.1 \</span><br><span class="line">    -U \</span><br><span class="line">    -png archi_sea</span><br></pre></td></tr></table></figure><p>而 PyGMT 則是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pygmt</span><br><span class="line">fig &#x3D; pygmt.Figure()</span><br><span class="line">fig.coast(</span><br><span class="line">        region&#x3D;[19.42, 22.95, 59.71, 60.56],</span><br><span class="line">        projection&#x3D;&quot;M6i&quot;,</span><br><span class="line">        shorelines&#x3D;[&#39;0.1p&#39;, &#39;black&#39;],</span><br><span class="line">        land&#x3D;&#39;darkseagreen2&#39;,</span><br><span class="line">        water&#x3D;&#39;cornflowerblue&#39;,</span><br><span class="line">        frame&#x3D;[&#39;a2f0.5g1&#39;, &#39;WSne+t&quot;Archipelago Sea&quot;&#39;],</span><br><span class="line">        area_thresh&#x3D;0.1,</span><br><span class="line">        timestamp&#x3D;True,</span><br><span class="line">)</span><br><span class="line">fig.show()</span><br><span class="line">fig.savefig(&#39;archi_sea_pygmt.png&#39;)</span><br></pre></td></tr></table></figure><p>在查看文件之前，哪個腳本較能夠讓人直覺去猜到各參數的意義，相信答案已經很明顯了吧。</p><h2 id="PyGMT-的疑慮與待改進之處"><a href="#PyGMT-的疑慮與待改進之處" class="headerlink" title="PyGMT 的疑慮與待改進之處"></a>PyGMT 的疑慮與待改進之處</h2><p>然而，相對於 GMT 的開發歷史，PyGMT 仍然是一個非常非常年輕的套件。縱使有了 NSF 的贊助，相對於其他類似規模的開源專案資源開發能量仍然十分有限。也因此我們可以輕易地找出許多理由，去建議剛接觸指令製圖的新手「先不要」輕易嘗試 PyGMT 這個套件。理由如下：</p><ol><li>PyGMT 支援的 GMT 模組數量仍然有限</li><li>即使某些 GMT 模組能被 PyGMT 支援，但能使用的長選項參數、能夠讀取的資料格式仍相對受限</li><li>開發/教學文件與範本數量仍極度缺乏，但此部分至少可以對照 GMT 指令版本的文件</li></ol><p>第 1,2 點的部分，以目前釋出的 0.3.1 版為例，該版本不支援、支援有限但常被使用的 GMT 指令模組包含了 <a href="https://docs.generic-mapping-tools.org/6.2/project.html"><code>project</code></a> (對平面直線附近包含深度資訊的座標點進行剖面繪製)，<a href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/pssac.html"><code>pssac</code></a> (讀取 SAC 檔並繪製地震波形)， <a href="https://docs.generic-mapping-tools.org/6.2/histogram.html"><code>histogram</code></a> (繪製長條圖，目前已於 <a href="https://zh.wikipedia.org/zh-tw/Git">git</a> <code>master</code> 開發中版本開始支援)，<a href="https://docs.generic-mapping-tools.org/6.2/supplements/seis/meca.html"><code>meca</code></a> (舊稱 <code>psmeca</code>，已實作，但不支援震源機制球置放在震央以外的位置)…等</p><p>另外在傳統 GMT 繪圖的過程中，我們需要 <code>-V</code> 選項來讓程式輸出更多明顯的提示訊息以利除錯校正，在 PyGMT 中開發者嘗試使用 <code>verbose=True</code> 使其參數更容易被理解，但大量使用此選項後便會發現許多函式仍然只能使用 <code>V=True</code> 來應付其 alias 無法實作的問題。</p><p>理論上來說上面所遇到的問題雖然會徒然花費使用者時間去想辦法應付這些問題，包含並不限於使用替代套件(<code>obspy</code> 簡單繪製地震波形，<code>matplotlib</code> 畫長條圖)、透過 <code>pygmt.clib.Session.call_module()</code> 暴力呼叫指令、回去使用 <code>subprocess</code>…等，其中用到 <code>subprocess</code> 來應付模組 <code>project</code> 不被 PyGMT 支援的問題時，已經開始思考當初使用這個套件的理由了。</p><h2 id="PyGMT-還有搞頭嗎"><a href="#PyGMT-還有搞頭嗎" class="headerlink" title="PyGMT 還有搞頭嗎?"></a>PyGMT 還有搞頭嗎?</h2><p>身為開源軟體的使用者、推廣者而言，自己仍然是希望這個專案的開發能夠繼續下去。畢竟上面實際使用該套件後遇到的問題，多偏向開發、使用者社群尚未完整地建立起來的因素，再加上一般使用者多偏向從現有/舊有腳本去修改來繪製研究成果以節省時間，這也成為了推廣新工具(PyGMT，GMT 6 語法)、給予回饋的巨大阻礙。然而新需求、新方法總會不斷地出現，停留在舊版程式與腳本也遲早會遇到無法被新平臺、新工具支援的問題。如果我們持續停留在消耗別人既有成果而對於回饋開源專案這件事情不甚重視的話，未來能從它身上滿足的需求也將持續受限，無法跨出新的一步。</p><p>其他能做的事情，或許可以列舉：</p><ul><li>整理以上支援受限的 module 資訊，包含其必要性 (是否優於替代方案)，回報給開發者社群。</li><li>瞭解該專案 alias 實作方式，將能夠理解且需要修改的部分整理成新的 Pull Request (當然開發者搶先一步修好是更值得慶幸的)。</li><li>整理分享更多樣的繪圖腳本紀錄供社群參考，以利讓更多人在有意願嘗試時有個參考依據。</li></ul><p>對於那些前仆後繼在 GMT 相關專案投入大量心力改善軟體品質的前輩，個人也給予深深的尊敬與肯定，自己能做的除了以上那些，可能也只有幫忙打包新版的程式到自己習慣用的 Linux 發行版(Archlinux Arch Users Repository)，方便別人嘗鮮吧。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在 Python 的 API。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="opensource" scheme="http://sean0921.github.io/tags/opensource/"/>
+    
+    <category term="freesoftware" scheme="http://sean0921.github.io/tags/freesoftware/"/>
+    
+    <category term="geophysics" scheme="http://sean0921.github.io/tags/geophysics/"/>
+    
+    <category term="science" scheme="http://sean0921.github.io/tags/science/"/>
+    
+    <category term="mapping" scheme="http://sean0921.github.io/tags/mapping/"/>
+    
+    <category term="python" scheme="http://sean0921.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</title>
@@ -114,38 +143,6 @@
     <category term="anime" scheme="http://sean0921.github.io/tags/anime/"/>
     
     <category term="disney" scheme="http://sean0921.github.io/tags/disney/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?</title>
-    <link href="http://sean0921.github.io/2020/12/10/centos-stream-replace-centos-8/"/>
-    <id>http://sean0921.github.io/2020/12/10/centos-stream-replace-centos-8/</id>
-    <published>2020-12-09T17:04:27.000Z</published>
-    <updated>2021-03-26T17:45:05.094Z</updated>
-    
-    <content type="html"><![CDATA[<p>自從 12/8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後</p><p><a href="https://blog.centos.org/2020/12/future-is-centos-stream/">https://blog.centos.org/2020/12/future-is-centos-stream/</a><br><a href="https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html">https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html</a></p><p>甚至出現<a href="https://www.cyberciti.biz/linux-news/centos-linux-8-will-end-in-2021-and-shifts-focus-to-centos-stream/">報導</a>指出：CentOS Stream 不會比 RHEL 早拿到安全更新，又要幫 RHEL 先測試新套件，同時因為 CentOS Stream 的環境比較新，你在 CentOS Stream 上面構建的套件還無法移植回 RHEL 上</p><p>但我認為這個論點有一些不充分甚至是誤導的地方。</p><span id="more"></span><h2 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h2><p>在講下去之前，先記住兩件事實：</p><ol><li>RHEL/CentOS/CentOS Stream 在同一個大版號 (major release, 6/7/8) 內的 ABI/API 是保持穩定不變的 <a href="https://access.redhat.com/articles/rhel8-abi-compatibility#Scope">^1</a></li><li>CentOS 的安全性更新本來就是晚於 RHEL 的，且相較其他主流發行版晚很多</li></ol><h2 id="討論"><a href="#討論" class="headerlink" title="討論"></a>討論</h2><blockquote><ul><li>How will CVEs be handled in CentOS Stream?<br>…<br>In other words, CentOS Streams users will test RHEL ahead of everyone and<br>report bugs, but they won’ t get security updates till resolved in RHEL. Very<br>tricky situation.</li></ul></blockquote><p>這邊沒提到的是，傳統的 CentOS 本來就是這樣:</p><ul><li><a href="https://lists.centos.org/pipermail/centos-announce/2020-November/035873.html">https://lists.centos.org/pipermail/centos-announce/2020-November/035873.html</a></li><li><a href="https://lists.centos.org/pipermail/centos-announce/2020-November/035814.html">https://lists.centos.org/pipermail/centos-announce/2020-November/035814.html</a></li></ul><p>以這幾篇為例，傳統的 CentOS 本來就要等上一個禮拜（年代久遠的 release 甚至要到一個月）以上的時間才會接到來自 RHEL 的 Security patch，改成 CentOS Stream 之後不但不會比較慢，也有機會在更短的時間內接到 patch</p><blockquote><ul><li>Does this mean that CentOS Stream is the RHEL BETA test platform now?<br>…<br>There is no option if you use CentOS for CI<br>because you couldn’t use RHEL developer licenses.<br>Also, note that CentOS Stream will have different ABI/API at times,<br>so you can no longer test or build EPEL packages locally.</li></ul></blockquote><p>但 FAQ 其他地方已經講明了 <em>CentOS Stream is focused on the next RHEL minor release</em>.</p><p>然後 RHEL/CentOS 的 minor release 就是擺明不會變這些東西，想要用新套件/新東西，就是抓 software collection、module stream、epel、第三方repo 來用，不會也不應該因為 <code>dnf update</code>/<code>yum update</code> 之後一切都炸了</p><p>所以 <em>no longer test or build EPEL packages locally</em> 根本就偏離事實，再說如果真的是「packaging」的話，RHEL 和 CentOS 的套件相依性本來就完全對不起來了，換成 CentOS Stream 不會因此有什麼改變</p><h2 id="社群反應"><a href="#社群反應" class="headerlink" title="社群反應"></a>社群反應</h2><p>但現在的風向都一面倒認為不應該限制別人用 RHEL 吃剩的 CentOS (8.x/9.x…)，連當初 CentOS 的 Founder 都說要來 fork 出 Rocky Linux</p><p>好吧，我懷疑我的想法太天真了</p><p>但過往的 CentOS 的社群風氣、使用者/貢獻者比例，相對於其他發行版真的差太多了，RHEL 8 出來時<a href="https://www.centos.org/forums/viewtopic.php?f=10&t=71468">追 CentOS 8 開發進度</a>時才在 <a href="https://lists.centos.org/pipermail/centos-devel/2019-September/017694.html">mailing list</a> 發現維運這個專案的工作人力只有 3 個人，不做出這樣策略性的改變，懷疑 CentOS 發行版還能撐多久? (IBM/RedHat 也不可能無限制地投入資源)，所以即使 Rocky Linux 真的出來了，我也懷疑這樣的動力能維持多久 (或許它能夠號召到更多有同樣需求的贊助商吧)</p><h2 id="參考資源"><a href="#參考資源" class="headerlink" title="參考資源"></a>參考資源</h2>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;自從 12/8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.centos.org/2020/12/future-is-centos-stream/&quot;&gt;https://blog.centos.org/2020/12/future-is-centos-stream/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html&quot;&gt;https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;甚至出現&lt;a href=&quot;https://www.cyberciti.biz/linux-news/centos-linux-8-will-end-in-2021-and-shifts-focus-to-centos-stream/&quot;&gt;報導&lt;/a&gt;指出：CentOS Stream 不會比 RHEL 早拿到安全更新，又要幫 RHEL 先測試新套件，同時因為 CentOS Stream 的環境比較新，你在 CentOS Stream 上面構建的套件還無法移植回 RHEL 上&lt;/p&gt;
-&lt;p&gt;但我認為這個論點有一些不充分甚至是誤導的地方。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="operating-system" scheme="http://sean0921.github.io/tags/operating-system/"/>
-    
-    <category term="linux" scheme="http://sean0921.github.io/tags/linux/"/>
-    
-    <category term="redhat" scheme="http://sean0921.github.io/tags/redhat/"/>
-    
-    <category term="centos" scheme="http://sean0921.github.io/tags/centos/"/>
-    
-    <category term="centos-stream" scheme="http://sean0921.github.io/tags/centos-stream/"/>
-    
-    <category term="rhel" scheme="http://sean0921.github.io/tags/rhel/"/>
     
   </entry>
   
