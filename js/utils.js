@@ -14,6 +14,21 @@ if (typeof DOMTokenList.prototype.replace !== 'function') {
   };
 }
 
+(function() {
+  const onPageLoaded = () => document.dispatchEvent(
+    new Event('page:loaded', {
+      bubbles: true
+    })
+  );
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('readystatechange', onPageLoaded, { once: true });
+  } else {
+    onPageLoaded();
+  }
+  document.addEventListener('pjax:success', onPageLoaded);
+})();
+
 NexT.utils = {
 
   /**
@@ -72,7 +87,7 @@ NexT.utils = {
    */
   registerCopyCode: function() {
     let figure = document.querySelectorAll('figure.highlight');
-    if (figure.length === 0) figure = document.querySelectorAll('pre');
+    if (figure.length === 0) figure = document.querySelectorAll('pre:not(.mermaid)');
     figure.forEach(element => {
       element.querySelectorAll('.code .line span').forEach(span => {
         span.classList.forEach(name => {
@@ -86,6 +101,7 @@ NexT.utils = {
         const lines = element.querySelector('.code') || element.querySelector('code');
         const code = lines.innerText;
         if (navigator.clipboard) {
+          // https://caniuse.com/mdn-api_clipboard_writetext
           navigator.clipboard.writeText(code).then(() => {
             button.querySelector('i').className = 'fa fa-check-circle fa-fw';
           }, () => {
@@ -160,7 +176,7 @@ NexT.utils = {
           backToTop.querySelector('span').innerText = Math.round(scrollPercent) + '%';
         }
         if (readingProgressBar) {
-          readingProgressBar.style.width = scrollPercent.toFixed(2) + '%';
+          readingProgressBar.style.setProperty('--progress', scrollPercent.toFixed(2) + '%');
         }
       }
       if (!Array.isArray(NexT.utils.sections)) return;
@@ -173,7 +189,7 @@ NexT.utils = {
         index--;
       }
       this.activateNavByIndex(index);
-    });
+    }, { passive: true });
 
     backToTop && backToTop.addEventListener('click', () => {
       window.anime({
@@ -289,17 +305,6 @@ NexT.utils = {
     });
   },
 
-  getComputedStyle: function(element) {
-    const clone = element.cloneNode(true);
-    clone.style.position = 'absolute';
-    clone.style.visibility = 'hidden';
-    clone.style.display = 'block';
-    element.parentNode.appendChild(clone);
-    const height = clone.clientHeight;
-    element.parentNode.removeChild(clone);
-    return height;
-  },
-
   /**
    * Init Sidebar & TOC inner dimensions on all pages and for all schemes.
    * Need for Sidebar/TOC inner scrolling if content taller then viewport.
@@ -332,33 +337,75 @@ NexT.utils = {
     }
   },
 
-  getScript: function(url, callback, condition) {
-    if (condition) {
-      callback();
-    } else {
-      const script = document.createElement('script');
-      script.onload = () => {
-        setTimeout(callback);
-      };
-      script.src = url;
-      document.head.appendChild(script);
+  getScript: function(src, options = {}, legacyCondition) {
+    if (typeof options === 'function') {
+      return this.getScript(src, {
+        condition: legacyCondition
+      }).then(options);
     }
-  },
+    const {
+      condition = false,
+      attributes: {
+        id = '',
+        async = false,
+        defer = false,
+        crossOrigin = '',
+        dataset = {},
+        ...otherAttributes
+      } = {},
+      parentNode = null
+    } = options;
+    return new Promise((resolve, reject) => {
+      if (condition) {
+        resolve();
+      } else {
+        const script = document.createElement('script');
 
-  loadComments: function(selector, callback) {
-    const element = document.querySelector(selector);
-    if (!CONFIG.comments.lazyload || !element) {
-      callback();
-      return;
-    }
-    const intersectionObserver = new IntersectionObserver((entries, observer) => {
-      const entry = entries[0];
-      if (entry.isIntersecting) {
-        callback();
-        observer.disconnect();
+        if (id) script.id = id;
+        if (crossOrigin) script.crossOrigin = crossOrigin;
+        script.async = async;
+        script.defer = defer;
+        Object.assign(script.dataset, dataset);
+        Object.entries(otherAttributes).forEach(([name, value]) => {
+          script.setAttribute(name, String(value));
+        });
+
+        script.onload = resolve;
+        script.onerror = reject;
+
+        if (typeof src === 'object') {
+          const { url, integrity } = src;
+          script.src = url;
+          if (integrity) {
+            script.integrity = integrity;
+            script.crossOrigin = 'anonymous';
+          }
+        } else {
+          script.src = src;
+        }
+        (parentNode || document.head).appendChild(script);
       }
     });
-    intersectionObserver.observe(element);
-    return intersectionObserver;
+  },
+
+  loadComments: function(selector, legacyCallback) {
+    if (legacyCallback) {
+      return this.loadComments(selector).then(legacyCallback);
+    }
+    return new Promise(resolve => {
+      const element = document.querySelector(selector);
+      if (!CONFIG.comments.lazyload || !element) {
+        resolve();
+        return;
+      }
+      const intersectionObserver = new IntersectionObserver((entries, observer) => {
+        const entry = entries[0];
+        if (!entry.isIntersecting) return;
+
+        resolve();
+        observer.disconnect();
+      });
+      intersectionObserver.observe(element);
+    });
   }
 };

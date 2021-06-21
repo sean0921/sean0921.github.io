@@ -2,7 +2,7 @@
 <html lang="zh-tw">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
 
@@ -16,14 +16,10 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.5.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?">
@@ -33,14 +29,15 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png">
 <meta property="article:published_time" content="2021-06-20T23:37:03.000Z">
-<meta property="article:modified_time" content="2021-06-20T23:52:04.131Z">
+<meta property="article:modified_time" content="2021-06-21T00:02:22.850Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="opensource">
-<meta property="article:tag" content="freesoftware">
+<meta property="article:tag" content="genericmappingtools">
 <meta property="article:tag" content="geophysics">
-<meta property="article:tag" content="science">
+<meta property="article:tag" content="earthscience">
 <meta property="article:tag" content="mapping">
 <meta property="article:tag" content="python">
+<meta property="article:tag" content="freesoftware">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png">
 
@@ -48,15 +45,10 @@
 <link rel="canonical" href="http://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-tw'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"http://sean0921.github.io/2021/06/21/pygmt-2021-6-feedback/","path":"2021/06/21/pygmt-2021-6-feedback/","title":"PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用? | Sean's Blog</title>
   
 
@@ -64,40 +56,8 @@
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="Sean's Blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="Sean's Blog" type="application/rss+xml">
 </head>
@@ -164,7 +124,8 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Ho</p>
   <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
 </div>
@@ -177,7 +138,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -185,8 +146,8 @@
 
 
 
+          </div>
         </div>
-      </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -195,7 +156,7 @@
     </header>
 
     
-  <div class="back-to-top" role="button">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -241,7 +202,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-21 07:37:03 / Modified: 07:52:04" itemprop="dateCreated datePublished" datetime="2021-06-21T07:37:03+08:00">2021-06-21</time>
+      <time title="Created: 2021-06-21 07:37:03 / Modified: 08:02:22" itemprop="dateCreated datePublished" datetime="2021-06-21T07:37:03+08:00">2021-06-21</time>
     </span>
 
   
@@ -274,7 +235,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gmt coast \</span><br><span class="line">    -R19.42/22.95/59.71/60.56 \</span><br><span class="line">    -JM6i \</span><br><span class="line">    -W0.1p,black \</span><br><span class="line">    -Gdarkseagreen2 \</span><br><span class="line">    -Scornflowerblue \</span><br><span class="line">    -Ba2f0.5g1 \</span><br><span class="line">    -BWSne+t<span class="string">&quot;Archipelago Sea&quot;</span> \</span><br><span class="line">    -A0.1 \</span><br><span class="line">    -U \</span><br><span class="line">    -png archi_sea</span><br></pre></td></tr></table></figure>
 
 <p>而 PyGMT 則是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pygmt</span><br><span class="line">fig &#x3D; pygmt.Figure()</span><br><span class="line">fig.coast(</span><br><span class="line">        region&#x3D;[19.42, 22.95, 59.71, 60.56],</span><br><span class="line">        projection&#x3D;&quot;M6i&quot;,</span><br><span class="line">        shorelines&#x3D;[&#39;0.1p&#39;, &#39;black&#39;],</span><br><span class="line">        land&#x3D;&#39;darkseagreen2&#39;,</span><br><span class="line">        water&#x3D;&#39;cornflowerblue&#39;,</span><br><span class="line">        frame&#x3D;[&#39;a2f0.5g1&#39;, &#39;WSne+t&quot;Archipelago Sea&quot;&#39;],</span><br><span class="line">        area_thresh&#x3D;0.1,</span><br><span class="line">        timestamp&#x3D;True,</span><br><span class="line">)</span><br><span class="line">fig.show()</span><br><span class="line">fig.savefig(&#39;archi_sea_pygmt.png&#39;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pygmt</span><br><span class="line">fig = pygmt.Figure()</span><br><span class="line">fig.coast(</span><br><span class="line">        region=[19.42, 22.95, 59.71, 60.56],</span><br><span class="line">        projection=&quot;M6i&quot;,</span><br><span class="line">        shorelines=[&#x27;0.1p&#x27;, &#x27;black&#x27;],</span><br><span class="line">        land=&#x27;darkseagreen2&#x27;,</span><br><span class="line">        water=&#x27;cornflowerblue&#x27;,</span><br><span class="line">        frame=[&#x27;a2f0.5g1&#x27;, &#x27;WSne+t&quot;Archipelago Sea&quot;&#x27;],</span><br><span class="line">        area_thresh=0.1,</span><br><span class="line">        timestamp=True,</span><br><span class="line">)</span><br><span class="line">fig.show()</span><br><span class="line">fig.savefig(&#x27;archi_sea_pygmt.png&#x27;)</span><br></pre></td></tr></table></figure>
 
 <p>在查看文件之前，哪個腳本較能夠讓人直覺去猜到各參數的意義，相信答案已經很明顯了吧。</p>
 <h2 id="PyGMT-的疑慮與待改進之處"><a href="#PyGMT-的疑慮與待改進之處" class="headerlink" title="PyGMT 的疑慮與待改進之處"></a>PyGMT 的疑慮與待改進之處</h2><p>然而，相對於 GMT 的開發歷史，PyGMT 仍然是一個非常非常年輕的套件。縱使有了 NSF 的贊助，相對於其他類似規模的開源專案資源開發能量仍然十分有限。也因此我們可以輕易地找出許多理由，去建議剛接觸指令製圖的新手「先不要」輕易嘗試 PyGMT 這個套件。理由如下：</p>
@@ -305,11 +266,12 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/opensource/" rel="tag"># opensource</a>
-              <a href="/tags/freesoftware/" rel="tag"># freesoftware</a>
+              <a href="/tags/genericmappingtools/" rel="tag"># genericmappingtools</a>
               <a href="/tags/geophysics/" rel="tag"># geophysics</a>
-              <a href="/tags/science/" rel="tag"># science</a>
+              <a href="/tags/earthscience/" rel="tag"># earthscience</a>
               <a href="/tags/mapping/" rel="tag"># mapping</a>
               <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/freesoftware/" rel="tag"># freesoftware</a>
           </div>
 
         
@@ -332,28 +294,6 @@
 
 
 
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
@@ -365,25 +305,21 @@
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-glass-cheers"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Sean Ho</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
     </div>
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-
-
 
 
 

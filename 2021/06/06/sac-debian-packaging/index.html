@@ -2,7 +2,7 @@
 <html lang="zh-tw">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
 
@@ -16,14 +16,10 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.5.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="我們常見到的Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 Debian&#x2F;Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例">
@@ -33,7 +29,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif">
 <meta property="article:published_time" content="2021-06-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-06T16:51:23.676Z">
+<meta property="article:modified_time" content="2021-06-21T00:02:22.853Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="packaging">
@@ -46,15 +42,10 @@
 <link rel="canonical" href="http://sean0921.github.io/2021/06/06/sac-debian-packaging/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-tw'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"http://sean0921.github.io/2021/06/06/sac-debian-packaging/","path":"2021/06/06/sac-debian-packaging/","title":"在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例 | Sean's Blog</title>
   
 
@@ -62,40 +53,8 @@
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="Sean's Blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="Sean's Blog" type="application/rss+xml">
 </head>
@@ -162,7 +121,8 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Ho</p>
   <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
 </div>
@@ -175,7 +135,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -183,8 +143,8 @@
 
 
 
+          </div>
         </div>
-      </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -193,7 +153,7 @@
     </header>
 
     
-  <div class="back-to-top" role="button">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -245,7 +205,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-06-07 00:51:23" itemprop="dateModified" datetime="2021-06-07T00:51:23+08:00">2021-06-07</time>
+        <time title="Modified: 2021-06-21 08:02:22" itemprop="dateModified" datetime="2021-06-21T08:02:22+08:00">2021-06-21</time>
       </span>
 
   
@@ -318,28 +278,6 @@
 
 
 
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
@@ -351,25 +289,21 @@
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-glass-cheers"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Sean Ho</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
     </div>
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-
-
 
 
 
