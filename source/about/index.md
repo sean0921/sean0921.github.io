@@ -3,7 +3,7 @@ title: about
 date: 2021-07-03 04:13:43
 ---
 
-<img src="https://raw.githubusercontent.com/sean0921/sean0921.github.io/6320b6830a33f53eb1d2faafffc73dff53fa069f/images/photo.jpg" alt="I don't know what it is" height="50%"/>
+<img src="https://raw.githubusercontent.com/sean0921/sean0921.github.io/6320b6830a33f53eb1d2faafffc73dff53fa069f/images/photo.jpg" alt="" height="50%"/>
 
 ## 關於我
 
