@@ -148,6 +148,8 @@ feed:
   content: true
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
+## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:sean0921/sean0921.github.io.git
+  branch: gh-pages
