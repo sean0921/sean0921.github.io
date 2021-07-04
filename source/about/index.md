@@ -17,4 +17,4 @@ date: 2021-07-03 04:13:43
 
 * [timeseries\_process](https://github.com/sean0921/timeseries_process): 把 Fortran 古董用 [**Meson Build System**](https://mesonbuild.com/) 打包並用 `gfortran` 開源編譯器重新編譯成跨平台程式。不要再寫只有 Lahey Fortran 90 才能用的 code 啦！(如果真的不得已要用 Fortran)
 
-* [debian-gnome-terminal-transparency](https://github.com/sean0921/debian-gnome-terminal-transparency): 在 Debian 下讓無法透明的終端機(GNOME Terminal)再度透明起來！這樣就不用為了透明的終端機用其他發行版了！順便練習利用 `sbuild` 打包 Debian 套件。
+* [debian-gnome-terminal-transparency](https://github.com/sean0921/debian-gnome-terminal-transparency): 在 Debian 下讓無法透明的終端機(GNOME Terminal)再度透明起來！這樣就不用為了透明的終端機用其他發行版了！順便練習利用 `sbuild` 打包 Debian 套件，目前提供 amd64、arm64、armhf 版本。
