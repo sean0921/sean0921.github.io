@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,14 +20,24 @@ jobs:
           #
           # Default: false
           submodules: 'recursive'
-      - name: Cache node modules
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Cache NPM dependencies
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
-      - uses: yrpang/github-actions-hexo@v1.3
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          deploykey: ${{secrets.DEPLOY_KEY}}
-          branch: 'gh-pages'
-          username: 'Sean H'
-          email: 'sean.li.shin.ho@gmail.com'
+          github_token: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./public
+          publish_branch: gh-pages  # deploying branch
