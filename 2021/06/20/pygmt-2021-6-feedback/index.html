@@ -20,17 +20,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sean0921.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?">
-<meta property="og:url" content="http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/index.html">
+<meta property="og:url" content="https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/index.html">
 <meta property="og:site_name" content="Sean&#39;s Blog">
 <meta property="og:description" content="Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png">
 <meta property="article:published_time" content="2021-06-20T23:37:03.000Z">
-<meta property="article:modified_time" content="2021-07-04T13:46:46.891Z">
+<meta property="article:modified_time" content="2021-07-04T19:16:45.572Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="opensource">
 <meta property="article:tag" content="genericmappingtools">
@@ -43,11 +43,11 @@
 <meta name="twitter:image" content="https://gmt-tutorials.org/_images/making_first_map_gmt6_fig4.png">
 
 
-<link rel="canonical" href="http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/">
+<link rel="canonical" href="https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/","path":"2021/06/20/pygmt-2021-6-feedback/","title":"PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/","path":"2021/06/20/pygmt-2021-6-feedback/","title":"PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用? | Sean's Blog</title>
@@ -188,7 +188,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/">
+    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -219,7 +219,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-04 21:46:46" itemprop="dateModified" datetime="2021-07-04T21:46:46+08:00">2021-07-04</time>
+        <time title="Modified: 2021-07-05 03:16:45" itemprop="dateModified" datetime="2021-07-05T03:16:45+08:00">2021-07-05</time>
       </span>
 
   

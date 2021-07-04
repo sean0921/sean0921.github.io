@@ -4,18 +4,18 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sean&#39;s Blog</title>
-    <link>http://sean0921.github.io/</link>
+    <link>https://blog.clam.ml/</link>
     
-    <atom:link href="http://sean0921.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://blog.clam.ml/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>New Blog site construted by Hexo (nodejs package)</description>
-    <pubDate>Sun, 04 Jul 2021 13:46:46 GMT</pubDate>
+    <pubDate>Sun, 04 Jul 2021 19:16:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>Ptt/Ptt2 近期對於 SSH 連線實作的更動</title>
-      <link>http://sean0921.github.io/2021/07/04/ptt-is-testing-new-sshd/</link>
-      <guid>http://sean0921.github.io/2021/07/04/ptt-is-testing-new-sshd/</guid>
+      <link>https://blog.clam.ml/2021/07/04/ptt-is-testing-new-sshd/</link>
+      <guid>https://blog.clam.ml/2021/07/04/ptt-is-testing-new-sshd/</guid>
       <pubDate>Sun, 04 Jul 2021 09:49:11 GMT</pubDate>
       
       <description>&lt;p&gt;本篇文章將以使用者與 BBS 程式測試者的角度觀察，最近 PttBBS 對於 ssh 連線提供服務方式的更動，以及對於一般使用者可能造成的影響，此次更動相關的原始碼以及實作說明還沒被公開，因此若與往後官方說明有出入者，請以他們的為準。&lt;/p&gt;
@@ -29,31 +29,31 @@
       
       
       
-      <category domain="http://sean0921.github.io/tags/opensource/">opensource</category>
+      <category domain="https://blog.clam.ml/tags/opensource/">opensource</category>
       
-      <category domain="http://sean0921.github.io/tags/foss/">foss</category>
+      <category domain="https://blog.clam.ml/tags/foss/">foss</category>
       
-      <category domain="http://sean0921.github.io/tags/ptt/">ptt</category>
+      <category domain="https://blog.clam.ml/tags/ptt/">ptt</category>
       
-      <category domain="http://sean0921.github.io/tags/ptt2/">ptt2</category>
+      <category domain="https://blog.clam.ml/tags/ptt2/">ptt2</category>
       
-      <category domain="http://sean0921.github.io/tags/bbs/">bbs</category>
+      <category domain="https://blog.clam.ml/tags/bbs/">bbs</category>
       
-      <category domain="http://sean0921.github.io/tags/maplebbs/">maplebbs</category>
+      <category domain="https://blog.clam.ml/tags/maplebbs/">maplebbs</category>
       
-      <category domain="http://sean0921.github.io/tags/openssh/">openssh</category>
+      <category domain="https://blog.clam.ml/tags/openssh/">openssh</category>
       
-      <category domain="http://sean0921.github.io/tags/libssh/">libssh</category>
+      <category domain="https://blog.clam.ml/tags/libssh/">libssh</category>
       
       
-      <comments>http://sean0921.github.io/2021/07/04/ptt-is-testing-new-sshd/#disqus_thread</comments>
+      <comments>https://blog.clam.ml/2021/07/04/ptt-is-testing-new-sshd/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>PyGMT, 在 Python 製圖領域推廣 GMT 的利器? 我 ok, 你先用?</title>
-      <link>http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/</link>
-      <guid>http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/</guid>
+      <link>https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/</link>
+      <guid>https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/</guid>
       <pubDate>Sun, 20 Jun 2021 23:37:03 GMT</pubDate>
       
       <description>&lt;p&gt;Generic Mapping Tools，通用製圖工具，官方以及常見的簡稱為 GMT，是在地球科學領域廣泛使用的地理製圖工具之一。它可以在各種平臺結合 Shell Script (bash、csh)，Batch file(Windows) 的特性以及第三方工具(如: awk)，撰寫腳本以進行空間資訊的數據處理及高度客製化的地圖、圖表繪製。PyGMT 於 2020 年 5 月釋出，作為 GMT 在 Python 的 API。究竟這樣的專案對於 GMT 的使用族群而言有什麼可利用之處呢？以下分享個人的使用心得。&lt;/p&gt;</description>
@@ -64,29 +64,29 @@
       
       
       
-      <category domain="http://sean0921.github.io/tags/opensource/">opensource</category>
+      <category domain="https://blog.clam.ml/tags/opensource/">opensource</category>
       
-      <category domain="http://sean0921.github.io/tags/genericmappingtools/">genericmappingtools</category>
+      <category domain="https://blog.clam.ml/tags/genericmappingtools/">genericmappingtools</category>
       
-      <category domain="http://sean0921.github.io/tags/geophysics/">geophysics</category>
+      <category domain="https://blog.clam.ml/tags/geophysics/">geophysics</category>
       
-      <category domain="http://sean0921.github.io/tags/earthscience/">earthscience</category>
+      <category domain="https://blog.clam.ml/tags/earthscience/">earthscience</category>
       
-      <category domain="http://sean0921.github.io/tags/mapping/">mapping</category>
+      <category domain="https://blog.clam.ml/tags/mapping/">mapping</category>
       
-      <category domain="http://sean0921.github.io/tags/python/">python</category>
+      <category domain="https://blog.clam.ml/tags/python/">python</category>
       
-      <category domain="http://sean0921.github.io/tags/freesoftware/">freesoftware</category>
+      <category domain="https://blog.clam.ml/tags/freesoftware/">freesoftware</category>
       
       
-      <comments>http://sean0921.github.io/2021/06/20/pygmt-2021-6-feedback/#disqus_thread</comments>
+      <comments>https://blog.clam.ml/2021/06/20/pygmt-2021-6-feedback/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</title>
-      <link>http://sean0921.github.io/2021/06/05/sac-debian-packaging/</link>
-      <guid>http://sean0921.github.io/2021/06/05/sac-debian-packaging/</guid>
+      <link>https://blog.clam.ml/2021/06/05/sac-debian-packaging/</link>
+      <guid>https://blog.clam.ml/2021/06/05/sac-debian-packaging/</guid>
       <pubDate>Sat, 05 Jun 2021 16:00:00 GMT</pubDate>
       
       <description>&lt;p&gt;我們常見到的Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。&lt;/p&gt;</description>
@@ -97,23 +97,23 @@
       
       
       
-      <category domain="http://sean0921.github.io/tags/linux/">linux</category>
+      <category domain="https://blog.clam.ml/tags/linux/">linux</category>
       
-      <category domain="http://sean0921.github.io/tags/packaging/">packaging</category>
+      <category domain="https://blog.clam.ml/tags/packaging/">packaging</category>
       
-      <category domain="http://sean0921.github.io/tags/sysadmin/">sysadmin</category>
+      <category domain="https://blog.clam.ml/tags/sysadmin/">sysadmin</category>
       
-      <category domain="http://sean0921.github.io/tags/seismology/">seismology</category>
+      <category domain="https://blog.clam.ml/tags/seismology/">seismology</category>
       
       
-      <comments>http://sean0921.github.io/2021/06/05/sac-debian-packaging/#disqus_thread</comments>
+      <comments>https://blog.clam.ml/2021/06/05/sac-debian-packaging/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>成為 Git 獨行玩家的第一步 － 自架 cgit 網頁程式碼瀏覽服務</title>
-      <link>http://sean0921.github.io/2021/03/26/be-a-git-single-player-cgit-tutorial/</link>
-      <guid>http://sean0921.github.io/2021/03/26/be-a-git-single-player-cgit-tutorial/</guid>
+      <link>https://blog.clam.ml/2021/03/26/be-a-git-single-player-cgit-tutorial/</link>
+      <guid>https://blog.clam.ml/2021/03/26/be-a-git-single-player-cgit-tutorial/</guid>
       <pubDate>Fri, 26 Mar 2021 17:47:27 GMT</pubDate>
       
       <description>&lt;p&gt;不想被單一特定程式碼平臺綁住你個人開發的程式碼又想將你的心血整合起來供其他人參考嗎? 又或是擔心在 GitHub 上一堆為了學術研究用途的專案哪一天被和諧掉嗎? 如果沒有多人合作 CI/CD 需求直接從網頁登入存取的需求 &lt;code&gt;cgit&lt;/code&gt; 這個由 C 語言開發的網頁 cgi 服務, 簡潔又快速的功能或許可以輕易滿足你的需求喔&lt;/p&gt;</description>
@@ -124,25 +124,25 @@
       
       
       
-      <category domain="http://sean0921.github.io/tags/git/">git</category>
+      <category domain="https://blog.clam.ml/tags/git/">git</category>
       
-      <category domain="http://sean0921.github.io/tags/cgit/">cgit</category>
+      <category domain="https://blog.clam.ml/tags/cgit/">cgit</category>
       
-      <category domain="http://sean0921.github.io/tags/nginx/">nginx</category>
+      <category domain="https://blog.clam.ml/tags/nginx/">nginx</category>
       
-      <category domain="http://sean0921.github.io/tags/fastcgi/">fastcgi</category>
+      <category domain="https://blog.clam.ml/tags/fastcgi/">fastcgi</category>
       
-      <category domain="http://sean0921.github.io/tags/opensource/">opensource</category>
+      <category domain="https://blog.clam.ml/tags/opensource/">opensource</category>
       
       
-      <comments>http://sean0921.github.io/2021/03/26/be-a-git-single-player-cgit-tutorial/#disqus_thread</comments>
+      <comments>https://blog.clam.ml/2021/03/26/be-a-git-single-player-cgit-tutorial/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>從唯美浪漫到勵志成長 - 喬瑟與虎與魚群</title>
-      <link>http://sean0921.github.io/2021/01/22/josee-tiger-fish/</link>
-      <guid>http://sean0921.github.io/2021/01/22/josee-tiger-fish/</guid>
+      <link>https://blog.clam.ml/2021/01/22/josee-tiger-fish/</link>
+      <guid>https://blog.clam.ml/2021/01/22/josee-tiger-fish/</guid>
       <pubDate>Fri, 22 Jan 2021 09:13:42 GMT</pubDate>
       
       <description>&lt;p&gt;喬瑟與虎與魚群（ジョゼと虎と魚たち）是日本作家田邊聖子首次於 1984 年開始連載的短篇小說作品，於 2003 年、2020 年分別翻拍成日版與韓版真人電影，並於 2020/12/25 上映動畫電影 (臺灣於 2021/1/20 上映)&lt;/p&gt;
@@ -155,16 +155,16 @@
       
       
       
-      <category domain="http://sean0921.github.io/tags/anime/">anime</category>
+      <category domain="https://blog.clam.ml/tags/anime/">anime</category>
       
-      <category domain="http://sean0921.github.io/tags/novel/">novel</category>
+      <category domain="https://blog.clam.ml/tags/novel/">novel</category>
       
-      <category domain="http://sean0921.github.io/tags/romance/">romance</category>
+      <category domain="https://blog.clam.ml/tags/romance/">romance</category>
       
-      <category domain="http://sean0921.github.io/tags/josee/">josee</category>
+      <category domain="https://blog.clam.ml/tags/josee/">josee</category>
       
       
-      <comments>http://sean0921.github.io/2021/01/22/josee-tiger-fish/#disqus_thread</comments>
+      <comments>https://blog.clam.ml/2021/01/22/josee-tiger-fish/#disqus_thread</comments>
       
     </item>
     
