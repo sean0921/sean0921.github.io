@@ -31,12 +31,10 @@ jobs:
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
-      - name: Set Timezone
-        run: sudo timedatectl set-timezone Asia/Taipei
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: npm run build
+        run: TZ=Asia/Taipei npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
