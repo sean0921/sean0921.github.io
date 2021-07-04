@@ -21,33 +21,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="自從 12&#x2F;8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後 https:&#x2F;&#x2F;blog.centos.org&#x2F;2020&#x2F;12&#x2F;future-is-centos-stream&#x2F;https:&#x2F;&#x2F;lists.centos.org&#x2F;pipermail&#x2F;centos">
+<meta name="description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?">
-<meta property="og:url" content="https://blog.clam.ml/2020/12/09/centos-stream-replace-centos-8/index.html">
+<meta property="og:title" content="OpenSSH on Windows 7&#x2F;10">
+<meta property="og:url" content="https://blog.clam.ml/2020/04/27/openssh-win10/index.html">
 <meta property="og:site_name" content="Sean&#39;s Blog">
-<meta property="og:description" content="自從 12&#x2F;8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後 https:&#x2F;&#x2F;blog.centos.org&#x2F;2020&#x2F;12&#x2F;future-is-centos-stream&#x2F;https:&#x2F;&#x2F;lists.centos.org&#x2F;pipermail&#x2F;centos">
+<meta property="og:description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-12-09T17:04:27.000Z">
-<meta property="article:modified_time" content="2021-07-04T19:16:45.572Z">
+<meta property="article:published_time" content="2020-04-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-04T19:25:54.713Z">
 <meta property="article:author" content="Sean Ho">
-<meta property="article:tag" content="operating-system">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="redhat">
-<meta property="article:tag" content="centos">
-<meta property="article:tag" content="centos-stream">
-<meta property="article:tag" content="rhel">
+<meta property="article:tag" content="sysadmin">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.clam.ml/2020/12/09/centos-stream-replace-centos-8/">
+<link rel="canonical" href="https://blog.clam.ml/2020/04/27/openssh-win10/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2020/12/09/centos-stream-replace-centos-8/","path":"2020/12/09/centos-stream-replace-centos-8/","title":"CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2020/04/27/openssh-win10/","path":"2020/04/27/openssh-win10/","title":"OpenSSH on Windows 7/10"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CentOS 再見，但，CentOS Stream 真有那麼不堪嗎? | Sean's Blog</title>
+<title>OpenSSH on Windows 7/10 | Sean's Blog</title>
   
 
 
@@ -126,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本觀念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%8E%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">討論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E7%BE%A4%E5%8F%8D%E6%87%89"><span class="nav-number">3.</span> <span class="nav-text">社群反應</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%BA%90"><span class="nav-number">4.</span> <span class="nav-text">參考資源</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-%E5%AE%89%E8%A3%9D"><span class="nav-number">1.</span> <span class="nav-text">Client 安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">Server 安裝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%BF%E6%A0%A1"><span class="nav-number"></span> <span class="nav-text">調校</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -185,7 +180,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2020/12/09/centos-stream-replace-centos-8/">
+    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2020/04/27/openssh-win10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -198,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?
+          OpenSSH on Windows 7/10
         </h1>
 
         <div class="post-meta-container">
@@ -209,14 +204,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-12-10 01:04:27" itemprop="dateCreated datePublished" datetime="2020-12-10T01:04:27+08:00">2020-12-10</time>
+      <time title="Created: 2020-04-27 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-27T00:00:00+08:00">2020-04-27</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-05 03:16:45" itemprop="dateModified" datetime="2021-07-05T03:16:45+08:00">2021-07-05</time>
+        <time title="Modified: 2021-07-05 03:25:54" itemprop="dateModified" datetime="2021-07-05T03:25:54+08:00">2021-07-05</time>
       </span>
 
   
@@ -229,40 +224,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>自從 12/8 CentOS blog 和 Mailing list 相繼宣佈將要轉移開發重心到 CentOS Stream 上，並計劃要讓 CentOS 8.x (有版號的 release) 提前退休後</p>
-<p><a target="_blank" rel="noopener" href="https://blog.centos.org/2020/12/future-is-centos-stream/">https://blog.centos.org/2020/12/future-is-centos-stream/</a><br><a target="_blank" rel="noopener" href="https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html">https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html</a></p>
-<p>甚至出現<a target="_blank" rel="noopener" href="https://www.cyberciti.biz/linux-news/centos-linux-8-will-end-in-2021-and-shifts-focus-to-centos-stream/">報導</a>指出：CentOS Stream 不會比 RHEL 早拿到安全更新，又要幫 RHEL 先測試新套件，同時因為 CentOS Stream 的環境比較新，你在 CentOS Stream 上面構建的套件還無法移植回 RHEL 上</p>
-<p>但我認為這個論點有一些不充分甚至是誤導的地方。</p>
+        <p>雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7</p>
+<p>如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版</p>
 <span id="more"></span>
 
-<h2 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h2><p>在講下去之前，先記住兩件事實：</p>
-<ol>
-<li>RHEL/CentOS/CentOS Stream 在同一個大版號 (major release, 6/7/8) 內的 ABI/API 是保持穩定不變的 <a target="_blank" rel="noopener" href="https://access.redhat.com/articles/rhel8-abi-compatibility#Scope">^1</a></li>
-<li>CentOS 的安全性更新本來就是晚於 RHEL 的，且相較其他主流發行版晚很多</li>
-</ol>
-<h2 id="討論"><a href="#討論" class="headerlink" title="討論"></a>討論</h2><blockquote>
 <ul>
-<li>How will CVEs be handled in CentOS Stream?<br>…<br>In other words, CentOS Streams users will test RHEL ahead of everyone and<br>report bugs, but they won’ t get security updates till resolved in RHEL. Very<br>tricky situation.</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH">OpenSSH-Win32 GitHub 入口頁面</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/openssh-portable">OpenSSH-Win32 source code</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/releases">OpenSSH-Win32 執行檔載點</a></li>
 </ul>
-</blockquote>
-<p>這邊沒提到的是，傳統的 CentOS 本來就是這樣:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://lists.centos.org/pipermail/centos-announce/2020-November/035873.html">https://lists.centos.org/pipermail/centos-announce/2020-November/035873.html</a></li>
-<li><a target="_blank" rel="noopener" href="https://lists.centos.org/pipermail/centos-announce/2020-November/035814.html">https://lists.centos.org/pipermail/centos-announce/2020-November/035814.html</a></li>
+<p>首先要先去設定那邊關閉 OpenSSH 功能，這樣系統才不會先讀到 System32 那邊的 OpenSSH</p>
+<h2 id="Client-安裝"><a href="#Client-安裝" class="headerlink" title="Client 安裝"></a>Client 安裝</h2><p>把解壓縮的 OpenSSH 放在 Program Files 底下，加進系統 <code>PATH</code></p>
+<h2 id="Server-安裝"><a href="#Server-安裝" class="headerlink" title="Server 安裝"></a>Server 安裝</h2><p>參考 <a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH">GitHub wiki 頁面</a></p>
+<p>收工！</p>
+<h1 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h1><ul>
+<li><code>sshd_config</code> 位置： <code>C:\ProgramData\ssh</code>，可以改 ssh port，限制登入的使用者等進階安全設定</li>
+<li>理論上可以改 ssh 進去的 shell (預設是 cmd)</li>
 </ul>
-<p>以這幾篇為例，傳統的 CentOS 本來就要等上一個禮拜（年代久遠的 release 甚至要到一個月）以上的時間才會接到來自 RHEL 的 Security patch，改成 CentOS Stream 之後不但不會比較慢，也有機會在更短的時間內接到 patch</p>
-<blockquote>
-<ul>
-<li>Does this mean that CentOS Stream is the RHEL BETA test platform now?<br>…<br>There is no option if you use CentOS for CI<br>because you couldn’t use RHEL developer licenses.<br>Also, note that CentOS Stream will have different ABI/API at times,<br>so you can no longer test or build EPEL packages locally.</li>
-</ul>
-</blockquote>
-<p>但 FAQ 其他地方已經講明了 <em>CentOS Stream is focused on the next RHEL minor release</em>.</p>
-<p>然後 RHEL/CentOS 的 minor release 就是擺明不會變這些東西，想要用新套件/新東西，就是抓 software collection、module stream、epel、第三方repo 來用，不會也不應該因為 <code>dnf update</code>/<code>yum update</code> 之後一切都炸了</p>
-<p>所以 <em>no longer test or build EPEL packages locally</em> 根本就偏離事實，再說如果真的是「packaging」的話，RHEL 和 CentOS 的套件相依性本來就完全對不起來了，換成 CentOS Stream 不會因此有什麼改變</p>
-<h2 id="社群反應"><a href="#社群反應" class="headerlink" title="社群反應"></a>社群反應</h2><p>但現在的風向都一面倒認為不應該限制別人用 RHEL 吃剩的 CentOS (8.x/9.x…)，連當初 CentOS 的 Founder 都說要來 fork 出 Rocky Linux</p>
-<p>好吧，我懷疑我的想法太天真了</p>
-<p>但過往的 CentOS 的社群風氣、使用者/貢獻者比例，相對於其他發行版真的差太多了，RHEL 8 出來時<a target="_blank" rel="noopener" href="https://www.centos.org/forums/viewtopic.php?f=10&t=71468">追 CentOS 8 開發進度</a>時才在 <a target="_blank" rel="noopener" href="https://lists.centos.org/pipermail/centos-devel/2019-September/017694.html">mailing list</a> 發現維運這個專案的工作人力只有 3 個人，不做出這樣策略性的改變，懷疑 CentOS 發行版還能撐多久? (IBM/RedHat 也不可能無限制地投入資源)，所以即使 Rocky Linux 真的出來了，我也懷疑這樣的動力能維持多久 (或許它能夠號召到更多有同樣需求的贊助商吧)</p>
-<h2 id="參考資源"><a href="#參考資源" class="headerlink" title="參考資源"></a>參考資源</h2>
+
     </div>
 
     
@@ -271,25 +250,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/operating-system/" rel="tag"># operating-system</a>
-              <a href="/tags/linux/" rel="tag"># linux</a>
-              <a href="/tags/redhat/" rel="tag"># redhat</a>
-              <a href="/tags/centos/" rel="tag"># centos</a>
-              <a href="/tags/centos-stream/" rel="tag"># centos-stream</a>
-              <a href="/tags/rhel/" rel="tag"># rhel</a>
+              <a href="/tags/sysadmin/" rel="tag"># sysadmin</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/12/04/replace-gsview-with-wsl-gv/" rel="prev" title="使用 WSL/WSL2 的 gv 取代過時的 gsview">
-                  <i class="fa fa-chevron-left"></i> 使用 WSL/WSL2 的 gv 取代過時的 gsview
+                <a href="/2019/10/07/cuckoo/" rel="prev" title="布穀鳥">
+                  <i class="fa fa-chevron-left"></i> 布穀鳥
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/01/02/2020-pixel-soul-movie/" rel="next" title="靈魂急轉彎(Soul)觀後簡短感">
-                  靈魂急轉彎(Soul)觀後簡短感 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/05/05/nhiicc-exp-note/" rel="next" title="口罩預購與健保卡讀卡機程式使用心得">
+                  口罩預購與健保卡讀卡機程式使用心得 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

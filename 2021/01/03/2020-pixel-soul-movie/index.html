@@ -21,28 +21,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
+<meta name="description" content="先講結論，22 我婆 (如果如字幕的她沒打錯的話???? 以下可能劇透">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenSSH on Windows 7&#x2F;10">
-<meta property="og:url" content="https://blog.clam.ml/2020/04/26/openssh-win10/index.html">
+<meta property="og:title" content="靈魂急轉彎(Soul)觀後簡短感">
+<meta property="og:url" content="https://blog.clam.ml/2021/01/03/2020-pixel-soul-movie/index.html">
 <meta property="og:site_name" content="Sean&#39;s Blog">
-<meta property="og:description" content="雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7 如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版">
+<meta property="og:description" content="先講結論，22 我婆 (如果如字幕的她沒打錯的話???? 以下可能劇透">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-04-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-04T19:16:45.572Z">
+<meta property="og:image" content="https://i.imgur.com/qpD4kAQ.png">
+<meta property="article:published_time" content="2021-01-02T17:41:04.000Z">
+<meta property="article:modified_time" content="2021-07-04T19:25:54.713Z">
 <meta property="article:author" content="Sean Ho">
-<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="anime">
+<meta property="article:tag" content="disney">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/qpD4kAQ.png">
 
 
-<link rel="canonical" href="https://blog.clam.ml/2020/04/26/openssh-win10/">
+<link rel="canonical" href="https://blog.clam.ml/2021/01/03/2020-pixel-soul-movie/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2020/04/26/openssh-win10/","path":"2020/04/26/openssh-win10/","title":"OpenSSH on Windows 7/10"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2021/01/03/2020-pixel-soul-movie/","path":"2021/01/03/2020-pixel-soul-movie/","title":"靈魂急轉彎(Soul)觀後簡短感"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>OpenSSH on Windows 7/10 | Sean's Blog</title>
+<title>靈魂急轉彎(Soul)觀後簡短感 | Sean's Blog</title>
   
 
 
@@ -108,7 +111,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -121,7 +124,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-%E5%AE%89%E8%A3%9D"><span class="nav-number">1.</span> <span class="nav-text">Client 安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">Server 安裝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%BF%E6%A0%A1"><span class="nav-number"></span> <span class="nav-text">調校</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2020/04/26/openssh-win10/">
+    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2021/01/03/2020-pixel-soul-movie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OpenSSH on Windows 7/10
+          靈魂急轉彎(Soul)觀後簡短感
         </h1>
 
         <div class="post-meta-container">
@@ -204,14 +206,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-04-27 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-27T00:00:00+08:00">2020-04-27</time>
+      <time title="Created: 2021-01-03 01:41:04" itemprop="dateCreated datePublished" datetime="2021-01-03T01:41:04+08:00">2021-01-03</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-05 03:16:45" itemprop="dateModified" datetime="2021-07-05T03:16:45+08:00">2021-07-05</time>
+        <time title="Modified: 2021-07-05 03:25:54" itemprop="dateModified" datetime="2021-07-05T03:25:54+08:00">2021-07-05</time>
       </span>
 
   
@@ -224,23 +226,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>雖然新版 Windows 10 已經有預裝 OpenSSH Client 了，也可以自行啟用 OpenSSH Server，不過版本都似乎停留在 7.7</p>
-<p>如果想要在 Win10 體驗較新版本的 OpenSSH (~8.1) ，或是想在 Win7 上也體驗 OpenSSH 的話，可以去以下載點下載官方測試版</p>
+        <p>先講結論，22 我婆 (如果如字幕的她沒打錯的話????<br><img src="https://i.imgur.com/qpD4kAQ.png"></p>
+<p>以下可能劇透</p>
 <span id="more"></span>
 
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH">OpenSSH-Win32 GitHub 入口頁面</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/openssh-portable">OpenSSH-Win32 source code</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/releases">OpenSSH-Win32 執行檔載點</a></li>
-</ul>
-<p>首先要先去設定那邊關閉 OpenSSH 功能，這樣系統才不會先讀到 System32 那邊的 OpenSSH</p>
-<h2 id="Client-安裝"><a href="#Client-安裝" class="headerlink" title="Client 安裝"></a>Client 安裝</h2><p>把解壓縮的 OpenSSH 放在 Program Files 底下，加進系統 <code>PATH</code></p>
-<h2 id="Server-安裝"><a href="#Server-安裝" class="headerlink" title="Server 安裝"></a>Server 安裝</h2><p>參考 <a target="_blank" rel="noopener" href="https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH">GitHub wiki 頁面</a></p>
-<p>收工！</p>
-<h1 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h1><ul>
-<li><code>sshd_config</code> 位置： <code>C:\ProgramData\ssh</code>，可以改 ssh port，限制登入的使用者等進階安全設定</li>
-<li>理論上可以改 ssh 進去的 shell (預設是 cmd)</li>
-</ul>
+<p>這部作品有幾個對我頻率的地方</p>
+<p>首先是以藍調音樂為傳遞主角思維與人生理想的媒介</p>
+<p>在這樣題材的表現上</p>
+<p>Pixel 在基於思慮多元種族議題(BLM?)方面上拿到的 Political Correct 的分數以外</p>
+<p>也兼顧了藝術性的傳達，讓<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%97%8D%E8%AA%BF">藍調</a>曲風與<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%88%B5%E5%A3%AB%E4%B9%90">爵士樂</a>的優美與哀愁透過更為普及的媒介傳達出來</p>
+<p>這是讓以前半夜在收音機隨興聽相關節目的我相當感動的地方</p>
+<p>也可以巧妙地搭配靈魂出竅的橋段讓劇情更為順暢</p>
+<p>再來是 22 號對於生活之美的體悟</p>
+<p>從 22 號犀利卻中肯的言辭，不難看出他是跟隨過許多名人並理解過其思想仍玩世不恭的人</p>
+<p>吸收到許多知識與哲學涵養的靈魂但怎樣都拿不到投胎轉世的通行證</p>
+<p>但進了主角身體</p>
+<p>在那些主角以為平凡無奇，甚至單調到令人絕望的日常</p>
+<p>卻因為 22 這個亂源的自作主張，擦出了不一樣的「火花」，</p>
+<p>22 對每一件讓他驚喜的小物收藏，披薩、桃花心木種子…等，也成為了啟發主角與我們的契機</p>
+<blockquote>
+<p>找回美的感覺其實很簡單，去觸摸一片葉子，去聞一下在很熱很熱的夏天、下完午後暴雨的氣味，那是都我們有記憶的感覺，那都會引發我們的感觸和感動。</p>
+</blockquote>
+<p>就如同蔣勳提過的</p>
+<p>22 也用了這樣的概念不經意地找回主角遺忘生活各個角落的感動，然而當時主角並沒有察覺</p>
+<p>甚至責怪 22 只是利用別人的身體作為自己拿到通行證的捷徑，因此 22 的陰暗面就再也承受不住了</p>
+<p>其實最讓人揪心也是最讓人「享受」的部分也是 22 暴衝，以及以為主角沒救但是至少能夠不抱遺憾離開的那個橋段吧</p>
+<p>但除了劇情希望更能為大眾所接受的考量，或許也是不希望整部作品想要傳達的概念失焦吧。</p>
 
     </div>
 
@@ -250,20 +261,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/sysadmin/" rel="tag"># sysadmin</a>
+              <a href="/tags/anime/" rel="tag"># anime</a>
+              <a href="/tags/disney/" rel="tag"># disney</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2019/10/06/cuckoo/" rel="prev" title="布穀鳥">
-                  <i class="fa fa-chevron-left"></i> 布穀鳥
+                <a href="/2020/12/10/centos-stream-replace-centos-8/" rel="prev" title="CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?">
+                  <i class="fa fa-chevron-left"></i> CentOS 再見，但，CentOS Stream 真有那麼不堪嗎?
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/05/04/nhiicc-exp-note/" rel="next" title="口罩預購與健保卡讀卡機程式使用心得">
-                  口罩預購與健保卡讀卡機程式使用心得 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/01/22/josee-tiger-fish/" rel="next" title="從唯美浪漫到勵志成長 - 喬瑟與虎與魚群">
+                  從唯美浪漫到勵志成長 - 喬瑟與虎與魚群 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
