@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/rphrOxQ.png">
 <meta property="og:image" content="https://i.imgur.com/6aPiuHM.png">
 <meta property="article:published_time" content="2021-07-04T09:49:11.000Z">
-<meta property="article:modified_time" content="2021-07-04T19:30:21.895Z">
+<meta property="article:modified_time" content="2021-07-05T03:22:28.271Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="opensource">
 <meta property="article:tag" content="foss">
@@ -222,7 +222,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-05 03:30:21" itemprop="dateModified" datetime="2021-07-05T03:30:21+08:00">2021-07-05</time>
+        <time title="Modified: 2021-07-05 11:22:28" itemprop="dateModified" datetime="2021-07-05T11:22:28+08:00">2021-07-05</time>
       </span>
 
   
@@ -245,7 +245,7 @@
 <p>至於其他連線方式(ssh, telnet)，根據既有的公開程式可以得知都會留下相關記錄，因此這方面就不再說明了。</p>
 <h2 id="分析與討論"><a href="#分析與討論" class="headerlink" title="分析與討論"></a>分析與討論</h2><p>另外在 Ptt、Ptt2 SYSOP 板爬梳一些討論資料，以及 <a target="_blank" rel="noopener" href="https://github.com/ptt/pttbbs">PttBBS 原始碼</a>、<a target="_blank" rel="noopener" href="https://www.ptt.cc/bbs/PttCurrent/">PttCurrent 板</a>提供的相關文件後，我們可以找到當初 PttBBS 可以承受同時間 15~6 萬人上線，關鍵在於 PttBBS 會經由 logind 程式接收大量 telnet 連線並為各 Client 顯示登入畫面，登入成功後再導入 mbbsd 進行主要的 bbs 指令操作。</p>
 <p>然而，ssh 連線方式的實作則是直接在 Linux Server 開一個 <code>bbs</code> / <code>bbsu</code> 帳號，login shell 分別設爲 <code>/home/bbs/bin/bbsrf</code> 和 <code>/home/bbs/bin/utf8</code> ( symbolic link 到 <code>/home/bbs/bin/bbsrf</code> )，連線成功後即直接開啟 mbbsd 程式進行登入程序。</p>
-<p>引用 BBS 開發者 IepIweidieng@github 在 <a target="_blank" rel="noopener" href="https://discord.ccns.io/">CCNS Discord</a> #bbs-dev 的<a target="_blank" rel="noopener" href="https://discord.com/channels/330361502643257345/370600485612290060/843869940427522099">描述</a>:</p>
+<p>引用 BBS 開發者 <a target="_blank" rel="noopener" href="https://github.com/IepIweidieng">IepIweidieng(github)</a> 在 <a target="_blank" rel="noopener" href="https://discord.ccns.io/">CCNS Discord</a> #bbs-dev 的<a target="_blank" rel="noopener" href="https://discord.com/channels/330361502643257345/370600485612290060/843869940427522099">描述</a>:</p>
 <blockquote>
 <p><code>logind</code> 在使用者成功登入後才會將使用者的 <code>fd</code> 轉交給 <code>mbbsd</code> 並進行 <code>fork()</code>。<code>mbbsd</code> daemon 模式則是一連線就會 <code>fork()</code>。非 daemon 模式則是完全從頭啟動。</p>
 </blockquote>
