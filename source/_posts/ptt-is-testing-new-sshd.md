@@ -36,7 +36,7 @@ date: 2021-07-04 17:49:11
 
 然而，ssh 連線方式的實作則是直接在 Linux Server 開一個 `bbs` / `bbsu` 帳號，login shell 分別設爲 `/home/bbs/bin/bbsrf` 和 `/home/bbs/bin/utf8` ( symbolic link 到 `/home/bbs/bin/bbsrf` )，連線成功後即直接開啟 mbbsd 程式進行登入程序。
 
-引用 BBS 開發者 IepIweidieng@github 在 [CCNS Discord](https://discord.ccns.io) #bbs-dev 的[描述](https://discord.com/channels/330361502643257345/370600485612290060/843869940427522099):
+引用 BBS 開發者 [IepIweidieng(github)](https://github.com/IepIweidieng) 在 [CCNS Discord](https://discord.ccns.io) #bbs-dev 的[描述](https://discord.com/channels/330361502643257345/370600485612290060/843869940427522099):
 
 > `logind` 在使用者成功登入後才會將使用者的 `fd` 轉交給 `mbbsd` 並進行 `fork()`。`mbbsd` daemon 模式則是一連線就會 `fork()`。非 daemon 模式則是完全從頭啟動。
 
