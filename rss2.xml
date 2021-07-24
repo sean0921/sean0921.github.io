@@ -9,7 +9,7 @@
     <atom:link href="https://blog.clam.ml/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>New Blog site construted by Hexo (nodejs package)</description>
-    <pubDate>Wed, 14 Jul 2021 05:53:50 GMT</pubDate>
+    <pubDate>Sat, 24 Jul 2021 17:43:33 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -97,9 +97,9 @@
       
       
       
-      <category domain="https://blog.clam.ml/tags/linux/">linux</category>
-      
       <category domain="https://blog.clam.ml/tags/packaging/">packaging</category>
+      
+      <category domain="https://blog.clam.ml/tags/linux/">linux</category>
       
       <category domain="https://blog.clam.ml/tags/sysadmin/">sysadmin</category>
       
