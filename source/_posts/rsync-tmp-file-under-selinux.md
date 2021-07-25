@@ -1,12 +1,14 @@
 ---
 title: 在 SELinux 環境下建立發行版鏡像站需要處理的權限問題
 tags:
-- rsync
-- selinux
-- linux
-- sysadmin
-- mirroring
+  - rsync
+  - selinux
+  - linux
+  - sysadmin
+  - mirroring
+date: 2021-07-25 18:34:20
 ---
+
 
 SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它可以保護我們避免自己或他人不恰當的資源誤用，但更多時候我們則是被它複雜的權限設定所困惑，進而將其設定為 permissive 甚至是 disabled 來逃避現實。這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存區權限，節省往後摸索的時間。
 
