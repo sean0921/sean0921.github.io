@@ -42,7 +42,7 @@ SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它�
 
 以及 `rsync(1)` man page<sub>[4]</sub> 提到的:
 
-> This changes the way rsync checks if the files have been changed and are in need of  a  transfer.   Without  this  option, rsync  uses a  "quick check" that (by default) checks if each file’s size and time of last modification match between the sender and receiver.
+> This (`--checksum`) changes the way rsync checks if the files have been changed and are in need of  a  transfer.   Without  this  option, rsync  uses a  "quick check" that (by default) checks if each ***file’s size*** and ***time of last modification*** match between the sender and receiver.
 
 也就是說
 
