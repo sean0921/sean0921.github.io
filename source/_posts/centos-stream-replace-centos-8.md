@@ -26,7 +26,7 @@ https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html
 
 在講下去之前，先記住兩件事實：
 
-1. RHEL/CentOS/CentOS Stream 在同一個大版號 (major release, 6/7/8) 內的 ABI/API 是保持穩定不變的 [^1]
+1. RHEL/CentOS/CentOS Stream 在同一個大版號 (major release, 6/7/8) 內的 ABI/API 是保持穩定不變的<sub>[1]</sub>
 2. CentOS 的安全性更新本來就是晚於 RHEL 的，且相較其他主流發行版晚很多
 
 ## 討論
@@ -64,7 +64,4 @@ https://lists.centos.org/pipermail/centos-announce/2020-December/048208.html
 
 但過往的 CentOS 的社群風氣、使用者/貢獻者比例，相對於其他發行版真的差太多了，RHEL 8 出來時[追 CentOS 8 開發進度](https://www.centos.org/forums/viewtopic.php?f=10&t=71468)時才在 [mailing list](https://lists.centos.org/pipermail/centos-devel/2019-September/017694.html) 發現維運這個專案的工作人力只有 3 個人，不做出這樣策略性的改變，懷疑 CentOS 發行版還能撐多久? (IBM/RedHat 也不可能無限制地投入資源)，所以即使 Rocky Linux 真的出來了，我也懷疑這樣的動力能維持多久 (或許它能夠號召到更多有同樣需求的贊助商吧)
 
-
-## 參考資源
-
-[^1]: https://access.redhat.com/articles/rhel8-abi-compatibility#Scope
+[1]: https://access.redhat.com/articles/rhel8-abi-compatibility#Scope

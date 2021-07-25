@@ -24,7 +24,7 @@ tags:
 
 首先要用 `apt` 先安裝 `linux-support-<kernel version>` 套件
 
-以及: [^1]
+以及建立 Debian 標準套件包所需要的工具<sub>[1]</sub> :
 
 - `git` (要從 [Debian Salsa](https://salsa.debian.org) 抓 repo)
 - `build-essential`
@@ -103,7 +103,4 @@ Debian Salsa 和 Debian backports 都是很好用的東西，嫌 Debian 太舊�
 
 做完之後確定 `NetworkManager` 有在做事就搞定了
 
-
-## 參考資料
-
-[^1] https://wiki.debian.org/BuildingTutorial
+[1]: https://wiki.debian.org/BuildingTutorial
