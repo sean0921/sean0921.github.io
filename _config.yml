@@ -118,22 +118,21 @@ markdown:
         - markdown-it-abbr   
         - markdown-it-checkbox   
         - markdown-it-emoji    #表情符號
-        - markdown-it-footnote
         - markdown-it-ins      
         - markdown-it-sub      
         - markdown-it-sup
     
     anchors:
     # Minimum level for ID creation. (Ex. h2 to h6)
-    level: 2
-    # A suffix that is prepended to the number given if the ID is repeated.
-    collisionSuffix: 'v'           
-    # If `true`, creates an anchor tag with a permalink besides the heading.
-    permalink: false              
-    # Class used for the permalink anchor tag.
-    permalinkClass: header-anchor 
-    # The symbol used to make the permalink
-    permalinkSymbol: ¶    #如果permalink為true， next文章目錄的章節前面都會加一個這樣的符號
+      level: 2
+      # A suffix that is prepended to the number given if the ID is repeated.
+      collisionSuffix: 'v'           
+      # If `true`, creates an anchor tag with a permalink besides the heading.
+      permalink: false              
+      # Class used for the permalink anchor tag.
+      permalinkClass: header-anchor 
+      # The symbol used to make the permalink
+      permalinkSymbol: ¶  #如果permalink為true， next文章目錄的章節前面都會加一個這樣的符號
 
 # Atom Feeds
 ## Try atom feeds by suggestions of issue #1
