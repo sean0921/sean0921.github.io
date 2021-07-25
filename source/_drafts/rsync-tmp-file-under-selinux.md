@@ -24,5 +24,27 @@ SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它�
 
 ## 會用到的 rsync 觀念
 
+把 rsync 用到的觀念講得最簡明扼要的文件大概就是它自己的官方文件了 [^3]
+
+文件把該 rsync 套件會用到的角色(或程序)分成: client, server, daemon, remote shell, sender, receiver, generator
+
+以我們想要同步上游 rsync 鏡像站為例，我們是 client，他們是 server，他們同時也有 daemon 的角色(持續地在背景跑 rsyncd)，也因此我們不會用到 remote shell，也就是不會透過 ssh, rsh.. 等存取他們的 rsync 服務。他們接受我們要求傳檔案給我們，我們接收檔案，所以 sender 會跑在他們那邊，我們是則會跑 receiver，並在接收到檔案列表後 fork 出 generator 和 receiver，進行檔案傳輸的工作。
+
+其中我比較在意的部分在 The Receiver 那邊提到的:
+> The file's checksum is generated as the temp-file is built. At the end of the file, this checksum is compared with the file checksum from the sender. If the file checksums do not match the temp-file is deleted.
+> ...
+> After the temp-file has been completed, its ownership and permissions and modification time are set. It is then renamed to replace the basis file.
+
+以及 `rsync(1)` man page [^4] 提到的:
+
+> This changes the way rsync checks if the files have been changed and are in need of  a  transfer.   Without  this  option, rsync  uses a  "quick check" that (by default) checks if each file’s size and time of last modification match between the sender and receiver.
+
+也就是說
+
+1. 如果有啟用 `--checksum`，在確認 checksum (聽說較新版本 rsync 是用 MD5) 沒問題後，temp file 就會移過去取代原始檔案。
+2. 如果沒有啟用 checksum 機制，rsync 會使用「快速檢查行為」("quick check" behavior)，確認最後修改時間和檔案大小沒問題後，temp file 就會「移過去」取代原始檔案。
+
 [^1] http://linux.vbird.org/linux_basic/0440processcontrol.php#selinux
 [^2] https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index
+[^3] https://rsync.samba.org/how-rsync-works.html
+[^4] https://man7.org/linux/man-pages/man1/rsync.1.html
