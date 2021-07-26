@@ -29,7 +29,7 @@
 <meta property="og:description" content="SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它可以保護我們避免自己或他人不恰當的資源誤用，但更多時候我們則是被它複雜的權限設定所困惑，進而將其設定為 Permissive 甚至是 Disabled 來逃避現實。這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存區權限，節省往後摸索的時間。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-07-25T10:34:20.000Z">
-<meta property="article:modified_time" content="2021-07-25T11:59:20.003Z">
+<meta property="article:modified_time" content="2021-07-26T06:46:12.694Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="sysadmin">
@@ -207,10 +207,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-07-25 18:34:20 / Modified: 19:59:20" itemprop="dateCreated datePublished" datetime="2021-07-25T18:34:20+08:00">2021-07-25</time>
+      <time title="Created: 2021-07-25 18:34:20" itemprop="dateCreated datePublished" datetime="2021-07-25T18:34:20+08:00">2021-07-25</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-26 14:46:12" itemprop="dateModified" datetime="2021-07-26T14:46:12+08:00">2021-07-26</time>
+      </span>
 
   
 </div>
@@ -251,8 +257,8 @@ After the temp-file has been completed, its ownership and permissions and modifi
 <li>如果沒有啟用 checksum 機制，rsync 會使用「快速檢查行為」(“quick check” behavior)，確認最後修改時間和檔案大小沒問題後，temp file 就會從 <strong>暫存路徑</strong> <em>移過去</em> 取代原始檔案。</li>
 </ol>
 <h2 id="實例解說-在-SELinux-啟用的系統上鏡像-Arch-Linux-套件庫">實例解說: 在 SELinux 啟用的系統上鏡像 Arch Linux 套件庫</h2>
-<p>Arch Linux 是一個相當新穎、簡潔的 <strong>x86_64</strong> 發行版，注意這邊也因為它官方只支援 x86_64 這個架構，因此實際把它官方套件庫的全部檔案抓下來，會發現不含 iso 檔大概只有 70 GiB 不到 ( Ubuntu 官方套件庫不含 iso 檔大概要佔用將近 1.5T 的容量)，因此順便鼓勵有需要的團體有興趣可以自行找可靠的 rsync server 來建立自己的 local mirror。</p>
-<p>回到問題，使用 Arch Linux 官方附的建議腳本<sub><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/infrastructure/-/blob/master/roles/syncrepo/files/syncrepo-template.sh">5</a></sub> 來同步上游 rsync mirror 的套件庫，並把每個留白的參數都根據自己需求填入資訊，會發生什麼事情呢?</p>
+<p>Arch Linux 是一個相當新穎、簡潔的 <strong>x86_64</strong> 發行版，注意這邊也因為它官方只支援 x86_64 這個架構，因此實際把它官方套件庫的全部檔案抓下來，會發現不含 iso 檔大概只有 70 GiB 不到 ( Ubuntu 官方套件庫不含 iso 檔大概要佔用將近 1.5T 的容量)。</p>
+<p>但如果我們使用 Arch Linux 官方附的建議腳本<sub><a target="_blank" rel="noopener" href="https://gitlab.archlinux.org/archlinux/infrastructure/-/blob/master/roles/syncrepo/files/syncrepo-template.sh">5</a></sub> 來同步上游 rsync mirror 的套件庫，並把每個留白的參數都根據自己需求填入資訊，會發生什麼事情呢?</p>
 <p>首先，假設我們要存放 mirror 內容的路徑是 <code>/mnt/mirror</code>，我們仍先把要共享 mirror 檔案內容的目錄及其下所有檔案的標籤都設爲 <code>public_content_t</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -a -t public_content_t &quot;/mnt/mirror(/.*)?&quot;</span><br><span class="line">restorecon -Rv /mnt/mirror</span><br></pre></td></tr></table></figure>
 <p>接著再來執行我們修改過後的同步腳本，然後回去 <code>ls -Z</code> 看看:</p>
