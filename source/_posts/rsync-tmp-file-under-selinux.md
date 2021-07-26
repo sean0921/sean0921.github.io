@@ -9,10 +9,12 @@ tags:
 date: 2021-07-25 18:34:20
 ---
 
-
-SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它可以保護我們避免自己或他人不恰當的資源誤用，但更多時候我們則是被它複雜的權限設定所困惑，進而將其設定為 Permissive 甚至是 Disabled 來逃避現實。這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存區權限，節省往後摸索的時間。
+這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存目錄權限。rsync 接收同步資料時，會先將抓取完未驗證的檔案放在暫存目錄，經校驗無誤後再移動到同步的目的地。如果 rsync 設定 `--temp-file` 目錄路徑的預設 context 與目的地目錄的不同，則會發生目的地目錄出現檔案實際 context 與該路徑下預設內容不符的情況，進而造成服務讀取時發生權限錯誤問題。解決方法有二: 1. 將暫存目錄的 context 設定成和同步目的地的一樣。 2. 取消設置 `--temp-file` 參數，此時未驗證的暫存檔就會存放在同步目的地的目錄底下<，確保 context 一致。
 
 <!--more-->
+
+## 簡介
+SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它可以保護我們避免自己或他人不恰當的資源誤用，但更多時候我們則是被它複雜的權限設定所困惑，進而將其設定為 Permissive 甚至是 Disabled 來逃避現實。這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存區權限。
 
 ## 會用到的 SELinux 觀念
 從鳥哥的中文文件<sub>[1]</sub> 以及 Red Hat 的官方文件<sub>[2]</sub> 我們可以大致理解 SELinux 主要想管理重點包含「程序是否能正確讀取『對應』的檔案資源」。
@@ -104,7 +106,7 @@ unconfined_u:object_r:public_content_t:s0 staging
 unconfined_u:object_r:public_content_t:s0 testing
 ```
 
-現在變成有被更新的檔案都會被 unlabeled 了，這難道是廠商的疏失嗎?
+現在變成有被更新的檔案都會被 unlabeled 了，這是為什麼呢?
 
 後來經歷一連串的測試之後，終於確定了問題出在 `--temp-file` 的這個參數，假設我們藉由該參數設定 rsync 暫存路徑為 `/mnt/mirror_tmp`，接下來我們來進行一個小實驗，任意設定該路徑的 selinux 標籤，改成對 rsync client 沒任何用途的 `rsync_tmp_t`，並把 `/mnt/mirror` 的標籤回復後，等待下次進行同步:
 
