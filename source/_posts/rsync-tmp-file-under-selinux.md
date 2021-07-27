@@ -48,9 +48,10 @@ SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它�
 
 也就是說
 
-1. 如果有啟用 `--checksum`，在確認 checksum (聽說較新版本 rsync 是用 MD5) 沒問題後，temp file 就會從 **暫存路徑** *移過去* 取代原始檔案。
-2. 如果沒有啟用 checksum 機制，rsync 會使用「快速檢查行為」("quick check" behavior)，確認最後修改時間和檔案大小沒問題後，temp file 就會從 **暫存路徑** *移過去* 取代原始檔案。
+1. 如果有啟用 `--checksum` 參數，在確認 checksum (聽說較新版本 rsync 是用 MD5) 沒問題後，temp file 就會從暫存路徑移動到目的地路徑取代原始檔案。
+2. 如果沒有啟用  `--checksum` 參數，rsync 會使用「快速檢查行為」("quick check" behavior)，確認最後修改時間和檔案大小沒問題後，temp file 就會從暫存路徑移動到目的地路徑取代原始檔案。
 
+結果是一樣的，*會從暫存路徑移動到目的地路徑取代原始檔案*，只是檢查機制不同，`--checksum` 會比較嚴格一點。
 
 ## 實例解說: 在 SELinux 啟用的系統上鏡像 Arch Linux 套件庫
 Arch Linux 是一個相當新穎、簡潔的 **x86_64** 發行版，注意這邊也因為它官方只支援 x86\_64 這個架構，因此實際把它官方套件庫的全部檔案抓下來，會發現不含 iso 檔大概只有 70 GiB 不到 ( Ubuntu 官方套件庫不含 iso 檔大概要佔用將近 1.5T 的容量)。也因此較適合拿來用一般的硬體資源來練習架設鏡像站。
@@ -140,9 +141,7 @@ unconfined_u:object_r:public_content_t:s0 testing
 1. 把 temp dir 的 context 設定成和同步目的地一樣的內容
 2. 不要設定 `--temp-dir` 參數 (這樣暫存檔的位置就會同步目的地一樣的目錄底下)
 
-
 ## 總結
-
 雖然 SELinux 對於系統管理者在資源的運用上給予了相當多綁手綁腳的限制，但釐清相關運作流程的觀念與細節之後，就可以讓 SELinux 成為使得 Linux 系統服務安全的重要夥伴。這次在 rsync 同步雖然也踩到這個一開始令人困惑的問題，但同樣也藉此進一步地理解了 rsync 相關運作流程和 SELinux 觀念，給予了我們不小啟發。
 
 [1]: <http://linux.vbird.org/linux_basic/0440processcontrol.php#selinux>
