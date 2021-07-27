@@ -17,7 +17,7 @@ date: 2021-07-25 18:34:20
 SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它可以保護我們避免自己或他人不恰當的資源誤用，但更多時候我們則是被它複雜的權限設定所困惑，進而將其設定為 Permissive 甚至是 Disabled 來逃避現實。這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存區權限。
 
 ## 會用到的 SELinux 觀念
-從鳥哥的中文文件<sub>[1]</sub> 以及 Red Hat 的官方文件<sub>[2]</sub> 我們可以大致理解 SELinux 主要想管理重點包含「程序是否能正確讀取『對應』的檔案資源」。
+從鳥哥的中文文件<sub>[1]</sub>以及 Red Hat 的官方文件<sub>[2]</sub>我們可以大致理解 SELinux 主要想管理重點包含「程序是否能正確讀取『對應』的檔案資源」。
 
 以使用 [nginx](https://zh.wikipedia.org/wiki/Nginx) 架設單純的靜態網頁伺服器為例，我們只預期外部使用者 [nginx](https://zh.wikipedia.org/wiki/Nginx) 只會存取到: `/var/www/html/` 或是 `/usr/share/nginx/html` 的內容，其他非經管理者允許，不小心或刻意讀取到其他路徑下的檔案內容的行為可能都是「邪魔歪道」。
 
@@ -42,7 +42,7 @@ SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它�
 > ...
 > After the temp-file has been completed, its ownership and permissions and modification time are set. It is then ***renamed to replace the basis file***.
 
-以及 `rsync(1)` man page<sub>[4]</sub> 提到的:
+以及 `rsync(1)` man page<sub>[4]</sub>提到的:
 
 > This (`--checksum`) changes the way rsync checks if the files have been changed and are in need of  a  transfer.   Without  this  option, rsync  uses a  "quick check" that (by default) checks if each ***file’s size*** and ***time of last modification*** match between the sender and receiver.
 
@@ -55,7 +55,7 @@ SELinux 是讓 Linux 系統管理者又愛又恨的安全性模組之一，它�
 ## 實例解說: 在 SELinux 啟用的系統上鏡像 Arch Linux 套件庫
 Arch Linux 是一個相當新穎、簡潔的 **x86_64** 發行版，注意這邊也因為它官方只支援 x86\_64 這個架構，因此實際把它官方套件庫的全部檔案抓下來，會發現不含 iso 檔大概只有 70 GiB 不到 ( Ubuntu 官方套件庫不含 iso 檔大概要佔用將近 1.5T 的容量)。也因此較適合拿來用一般的硬體資源來練習架設鏡像站。
 
-但如果我們使用 Arch Linux 官方附的建議腳本<sub>[5]</sub> 來同步上游 rsync mirror 的套件庫，並把每個留白的參數都根據自己需求填入資訊，會發生什麼事情呢?
+但如果我們使用 Arch Linux 官方附的建議腳本<sub>[5]</sub>來同步上游 rsync mirror 的套件庫，並把每個留白的參數都根據自己需求填入資訊，會發生什麼事情呢?
 
 首先，假設我們要存放 mirror 內容的路徑是 `/mnt/mirror`，我們仍先把要共享 mirror 檔案內容的目錄及其下所有檔案的標籤都設爲 `public_content_t`:
 
