@@ -15,4 +15,7 @@ date: 2021-08-22 14:02:36
 
 <!--more-->
 
+## 第一階段: apt-ftparchive + gpg + github-page
+- 網址: <https://gh.pkg.clam.ml/>
+
 To be continued....
