@@ -7,6 +7,9 @@ on:
 jobs:
   pages:
     runs-on: ubuntu-latest
+    env:
+      CNAME_ml: blog.clam.ml
+      CNAME_moe: blog.clam.moe
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -41,4 +44,17 @@ jobs:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
           publish_dir: ./public
           publish_branch: gh-pages  # deploying branch
-          cname: blog.clam.ml
+          cname: ${{ env.CNAME_ml }}
+      - name: Change CNAME
+        run: |
+          echo "${CNAME_moe}" | tee ./public/CNAME
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DEPLOY_TOKEN }}
+        with:
+          source-directory: 'public'
+          destination-github-username: 'sean0921'
+          destination-repository-name: ${{ env.CNAME_moe }}
+          user-email: sean.li.shin.ho@gmail.com
+          target-branch: master
