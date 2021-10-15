@@ -46,7 +46,7 @@ youtube-dl 是基於 [Unlicence](https://unlicense.org/) 授權，因此也開�
 以下以 yt-dlp 取代 youtube-dl 為例
 
 ### 重新命名執行檔(不推薦)
-這個方法滿單純的，就是找出 youtube-dl 的執行路徑，Windows 平臺你是在哪個路徑執行 `youtube-dl.exe` 這個程式，通常會跟 `mpv.exe` 安裝在同一個資料夾下。Linux/FreeBSD 等平臺則是在一個優先度比較高的 `$PATH` 路徑下，建立一個 symbolic link 連結到 yt-dlp 的執行檔路徑。例如:
+這個方法滿單純的，就是找出 youtube-dl 的執行路徑，Windows 平臺你是在哪個路徑執行 `youtube-dl.exe` 這個程式，通常會跟 `mpv.exe` 安裝在同一個資料夾下。Linux/FreeBSD 等平臺則是在一個優先度比較高的 `$PATH` 路徑下，建立一個軟連結到 yt-dlp 的執行檔路徑。例如:
 ```bash
 ln -rsv "${HOME}/.local/bin/yt-dlp" "${HOME}/.local/bin/youtube-dl"   ## 如果路徑衝突，請自行解決或解除安裝原版 youtube-dl
 ```
