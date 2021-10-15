@@ -16,8 +16,8 @@ Youtube-dl 歷經了一連串 DMCA 爭議後一度被 GitHub 下架，後來雖�
 ## youtube-dl 與 mpv
 不想被既有影音平臺使用規則限制的人都知道，除了坊間上流傳來來去去的影音下載網站以外，最知名、自己來用起來最方便的工具就是 youtube-dl 了。而 youtube-dl 除了直接下載各影音網站的內容儲存外，也可以用將它整合到你喜愛的影音播放軟體，直接播放串流影音。這類軟體包含但不限於 [mpv](https://mpv.io/) 以及[以它為基礎的播放器](https://github.com/mpv-player/mpv/wiki/Applications-using-mpv)。
 
-## 如何下載 mpv
-在 Linux/FreeBSD 平臺上安裝 mpv 是一件極度容易的事情，通常透過套件管理員安裝即可，以 Ubuntu 為例就是: `sudo apt install mpv`。而 Windows 使用者則是可以到 mpv 官網列的[下載列表](https://mpv.io/installation/)看哪個安裝方式最符合你的需求，通常我會去[第一個](https://sourceforge.net/projects/mpv-player-windows/files/)選「Download Latest Version」來安裝，解壓縮 `bootstraper` 資料夾點選 `update.bat` 安裝後，對於所有問題一律按「y」回答，就會把 mpv 和 youtube-dl 都幫你裝好了。剩下如何操作的部分，
+## 如何下載 youtube-dl 與 mpv
+在 Linux/FreeBSD 平臺上安裝 mpv 是一件極度容易的事情，通常透過套件管理員安裝即可，以 Ubuntu 為例就是: `sudo apt install mpv` 和 `pip3 install --user youtube-dl` 。而 Windows 使用者則是可以到 mpv 官網列的[下載列表](https://mpv.io/installation/)看哪個安裝方式最符合你的需求，通常我會去[第一個](https://sourceforge.net/projects/mpv-player-windows/files/)選「Download Latest Version」來安裝，解壓縮 `bootstraper` 資料夾點選 `update.bat` 安裝後，對於所有問題一律按「y」回答，就會把 mpv 和 youtube-dl 都幫你裝好了。剩下如何操作的部分，
 
 ## 如何用 mpv 播放串流影音
 若你想透過 mpv 播放你喜歡的影音網址，你可以在安裝完畢後開啟命令列，輸入 `mpv <影音網址>` 後即可播放，例如嘗試以下指令:
@@ -39,6 +39,8 @@ mpv https://vimeo.com/148751763    ## 支援 Vimeo
 youtube-dl 是基於 [Unlicence](https://unlicense.org/) 授權，因此也開始陸續出現許多分支來嘗試繼承開發能量，像 DMCA 下架事件就開始出現 [youtube-dlc](https://github.com/blackjack4494/yt-dlc)，但後來也無疾而終。
 
 而個人關注，且最近還有持續的開發的分支則是 [yt-dlp](https://github.com/yt-dlp/yt-dlp), 目前有維持一定的開發節奏且持續釋出新版本，是現階段值得使用的替代方案，也可以改善原版 youtube-dl 偶發性無法存取的問題。
+
+這些套件都可以透過 `pip install --user 套件名稱` 來安裝，或是直接到 GitHub Release 頁面下載 exe 檔。
 
 ## 如何在 mpv 使用 youtube-dl 替代方案
 以下以 yt-dlp 取代 youtube-dl 為例
