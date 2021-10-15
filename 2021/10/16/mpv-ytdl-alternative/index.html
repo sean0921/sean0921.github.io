@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/Ap5bYB1.png">
 <meta property="article:published_time" content="2021-10-15T21:19:42.000Z">
-<meta property="article:modified_time" content="2021-10-15T21:46:48.677Z">
+<meta property="article:modified_time" content="2021-10-15T21:47:38.922Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="youtube-dl">
 <meta property="article:tag" content="mpv">
@@ -210,7 +210,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-10-16 05:19:42 / Modified: 05:46:48" itemprop="dateCreated datePublished" datetime="2021-10-16T05:19:42+08:00">2021-10-16</time>
+      <time title="Created: 2021-10-16 05:19:42 / Modified: 05:47:38" itemprop="dateCreated datePublished" datetime="2021-10-16T05:19:42+08:00">2021-10-16</time>
     </span>
 
   
@@ -249,7 +249,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -rsv <span class="string">&quot;<span class="variable">$&#123;HOME&#125;</span>/.local/bin/yt-dlp&quot;</span> <span class="string">&quot;<span class="variable">$&#123;HOME&#125;</span>/.local/bin/youtube-dl&quot;</span>   <span class="comment">## 如果路徑衝突，請自行解決或解除安裝原版 youtube-dl</span></span><br></pre></td></tr></table></figure>
 <h3 id="更改-mpv-設定檔-適用於-0-33-版本">更改 mpv 設定檔 (適用於 &gt;= 0.33 版本)</h3>
 <p>上一個方法看似單純，卻容易在更新套件時把你的環境搞炸。因此我會建議能將 mpv 更新到此版本的使用者都使用此方法。</p>
-<p>首先我們可以先找出 mpv 設定檔的存放路徑，相關說明可以在官方文件找到。Windows 的使用者可以將它放在 <code>%USERPROFILE%\AppData\Roaming\mpv\mpv.conf</code> 或是同資料夾下的 <code>portable_config/mpv.conf</code>，Linux/FreeBSD 使用者則是可以去 <code>~/.config/mpv/mpv.conf</code> 新增或更改自己的設定檔。</p>
+<p>首先我們可以先找出 mpv 設定檔的存放路徑，相關說明可以在官方文件找到。Windows 的使用者可以將它放在 <code>%USERPROFILE%\AppData\Roaming\mpv\mpv.conf</code> 或是同資料夾下的 <code>portable_config\mpv.conf</code>，Linux/FreeBSD 使用者則是可以去 <code>~/.config/mpv/mpv.conf</code> 新增或更改自己的設定檔。</p>
 <p>然後我們只需要在設定檔新增以下一行:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script-opts=ytdl_hook-ytdl_path=/home/user/.local/bin/yt-dlp</span><br></pre></td></tr></table></figure>
 <p>(<code>/home/user/.local/bin/yt-dlp</code> 改成你放 yt-dlp 執行檔的路徑)</p>
