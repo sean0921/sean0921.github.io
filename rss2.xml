@@ -9,8 +9,35 @@
     <atom:link href="https://blog.clam.ml/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>New Blog site construted by Hexo (nodejs package)</description>
-    <pubDate>Fri, 15 Oct 2021 19:00:37 GMT</pubDate>
+    <pubDate>Fri, 15 Oct 2021 21:20:33 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>如何在串流播放器使用 youtube-dl 的替代品 - 以 mpv 為例</title>
+      <link>https://blog.clam.ml/2021/10/16/mpv-ytdl-alternative/</link>
+      <guid>https://blog.clam.ml/2021/10/16/mpv-ytdl-alternative/</guid>
+      <pubDate>Fri, 15 Oct 2021 21:19:42 GMT</pubDate>
+      
+      <description>&lt;p&gt;本篇文章將以 mpv 影音播放器為例，介紹如何在該軟體 0.33 之後的版本快速替換 youtube-dl 外掛所使用的路徑&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>本篇文章將以 mpv 影音播放器為例，介紹如何在該軟體 0.33 之後的版本快速替換 youtube-dl 外掛所使用的路徑</p><span id="more"></span><h2 id="youtube-dl-與-mpv">youtube-dl 與 mpv</h2><p>不想被既有影音平臺使用規則限制的人都知道，除了坊間上流傳來來去去的影音下載網站以外，最知名、自己來用起來最方便的工具就是 <code>youtube-dl</code> 了。而 <code>youtube-dl</code> 除了直接下載各影音網站的內容儲存外，也可以用將它整合到你喜愛的影音播放軟體，直接播放串流影音。這類軟體包含但不限於 <a href="https://mpv.io/">mpv</a> 以及<a href="https://github.com/mpv-player/mpv/wiki/Applications-using-mpv">以它為基礎的播放器</a>。</p><h2 id="如何下載-mpv">如何下載 mpv</h2><p>在 Linux/FreeBSD 平臺上安裝 mpv 是一件極度容易的事情，通常透過套件管理員安裝即可，以 Ubuntu 為例就是: <code>sudo apt install mpv</code>。而 Windows 使用者則是可以到 mpv 官網列的<a href="https://mpv.io/installation/">下載列表</a>看哪個安裝方式最符合你的需求，通常我會去<a href="https://sourceforge.net/projects/mpv-player-windows/files/">第一個</a>選「Download Latest Version」來安裝，解壓縮 <code>bootstraper</code> 資料夾點選 <code>update.bat</code> 安裝後，對於所有問題一律按「y」回答，就會把 <code>mpv</code> 和 <code>youtube-dl</code> 都幫你裝好了。剩下如何操作的部分，</p><h2 id="如何用-mpv-播放串流影音">如何用 mpv 播放串流影音</h2><p>若你想透過 <code>mpv</code> 播放你喜歡的影音網址，你可以在安裝完畢後開啟命令列，輸入 <code>mpv &lt;影音網址&gt;</code> 後即可播放，例如嘗試以下指令:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mpv https://youtu.be/dQw4w9WgXcQ   ## 支援 YouTube</span><br><span class="line">mpv https://vimeo.com/148751763    ## 支援 Vimeo</span><br></pre></td></tr></table></figure><p>你也可以將瀏覽器上的 youtube 連結拖入已經開啟的 mpv 視窗中:<br><img src="https://i.imgur.com/Ap5bYB1.png" alt=""></p><p>當然如果你有可以存取的 <a href="https://zh.wikipedia.org/wiki/HTTP_Live_Streaming">HLS 串流網址</a>，也可以直接丟給 mpv 來播放。</p><p>這樣子當我們不確定 youtube 影片的內容，又不想幫連廢片都不如的內容衝流量，就可以用這樣的方式來觀看，除此之外也仍然有阻擋廣告、硬體解碼(節省電腦運算資源)、一鍵截圖…等結合這兩個軟體各種方便的特性。</p><h2 id="youtube-dl-的爭議與沒落">youtube-dl 的爭議與沒落</h2><p>但這個專案首先歷經了一連串 DMCA 爭議後一度被 GitHub 下架，後來雖然恢復，但開發能量已大不如前，最後一次更新的時間是三個月前，上一次釋出版號的時間也已經是四個月前，回不去以往隔數天~一週就釋出新版號的開發節奏了。這也意味著當各大影音平臺改變策略，嘗試阻擋第三方存取的方式時，這個套件將難以再迅速因應。同時也無法再新增其他影音網站平臺的支援。</p><h2 id="youtube-dl-的替代方案">youtube-dl 的替代方案</h2><p>youtube-dl 是基於 <a href="https://unlicense.org/">Unlicence</a> 授權，因此也開始陸續出現許多分支來嘗試繼承開發能量，像 DMCA 下架事件就開始出現 <a href="https://github.com/blackjack4494/yt-dlc"><code>youtube-dlc</code></a>，但後來也無疾而終。</p><p>而個人關注，且最近還有持續的開發的分支則是 <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>, 目前有維持一定的開發節奏且持續釋出新版本，是現階段值得使用的替代方案，也可以改善原版 youtube-dl 偶發性無法存取的問題。</p><h2 id="如何在-mpv-使用-youtube-dl-替代方案">如何在 mpv 使用 youtube-dl 替代方案</h2><p>以下以 <code>yt-dlp</code> 取代 <code>youtube-dl</code> 為例</p><h3 id="重新命名執行檔-不推薦">重新命名執行檔(不推薦)</h3><p>這個方法滿單純的，就是找出 <code>youtube-dl</code> 的執行路徑，Windows 平臺你是在哪個路徑執行 <code>youtube-dl.exe</code> 這個程式，通常會跟 <code>mpv.exe</code> 安裝在同一個資料夾下。Linux/FreeBSD 等平臺則是在一個優先度比較高的 <code>$PATH</code> 路徑下，建立一個 symbolic link 連結到 <code>yt-dlp</code> 的執行檔路徑。例如:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -rsv <span class="string">&quot;<span class="variable">$&#123;HOME&#125;</span>/.local/bin/yt-dlp&quot;</span> <span class="string">&quot;<span class="variable">$&#123;HOME&#125;</span>/.local/bin/youtube-dl&quot;</span>   <span class="comment">## 如果路徑衝突，請自行解決或解除安裝原版 youtube-dl</span></span><br></pre></td></tr></table></figure><h3 id="更改-mpv-設定檔-適用於-0-33-版本">更改 mpv 設定檔 (適用於 &gt;= 0.33 版本)</h3><p>上一個方法看似單純，卻容易在更新套件時把你的環境搞炸。因此我會建議能將 mpv 更新到此版本的使用者都使用此方法。</p><p>首先我們可以先找出 mpv 設定檔的存放路徑，相關說明可以在官方文件找到。Windows 的使用者可以將它放在 <code>%USERPROFILE%\AppData\Roaming\mpv\mpv.conf</code> 或是同資料夾下的 <code>portable_config/mpv.conf</code>，Linux/FreeBSD 使用者則是可以去 <code>~/.config/mpv/mpv.conf</code> 新增或更改自己的設定檔。</p><p>然後我們只需要在設定檔新增以下一行:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script-opts=ytdl_hook-ytdl_path=/home/user/.local/bin/yt-dlp</span><br></pre></td></tr></table></figure><p>(<code>/home/user/.local/bin/yt-dlp</code> 改成你放 yt-dlp 執行檔的路徑)</p><p>這樣就不用更改任何環境變數、改檔名或是建立軟連結囉！</p><h2 id="結語">結語</h2><p>當我們觀看著影音的同時，我們也正在被平台提供商用各種意想不到的方式觀看著！<br>當然我們也可以積極關注更為開放、重視分享精神的影音平臺: 像是 <a href="https://wiwi.video/about/instance">wiwi</a> 推薦的 <a href="https://zh.wikipedia.org/wiki/PeerTube">PeerTube</a> 或 <a href="https://zh.wikipedia.org/wiki/LBRY">LBRY</a>。</p><p>但短時間內我們無法構造改革，因此我們使用這些工具，來讓我們仍然保有不被平臺限制使用存取方式的選擇，也能讓觀看影片的體驗更加彈性，應用到更多層面。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://blog.clam.ml/tags/youtube-dl/">youtube-dl</category>
+      
+      <category domain="https://blog.clam.ml/tags/mpv/">mpv</category>
+      
+      <category domain="https://blog.clam.ml/tags/yt-dlp/">yt-dlp</category>
+      
+      <category domain="https://blog.clam.ml/tags/video-streaming/">video-streaming</category>
+      
+      
+      <comments>https://blog.clam.ml/2021/10/16/mpv-ytdl-alternative/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Project CTPB 簡介</title>
@@ -137,33 +164,6 @@
       
       
       <comments>https://blog.clam.ml/2021/06/21/pygmt-2021-6-feedback/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>在 Debian/Ubuntu 等 Linux 發行版下簡易打包軟體 – 以 SAC 為例</title>
-      <link>https://blog.clam.ml/2021/06/06/sac-debian-packaging/</link>
-      <guid>https://blog.clam.ml/2021/06/06/sac-debian-packaging/</guid>
-      <pubDate>Sat, 05 Jun 2021 16:00:00 GMT</pubDate>
-      
-      <description>&lt;p&gt;我們常見到的Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>我們常見到的Linux 發行版基本上就是一個「拼裝車」，組合各個不同來源的專案原始碼組合成一個有多用途的「通用作業系統」。我們將以地震學軟體 SAC 為例，說明如何簡單利用「套件打包」的機制，藉由既有軟體打包管理工具，使得發行版內的軟體更能有秩序地被管理。</p><span id="more"></span><h2 id="套件打包的目的">套件打包的目的</h2><p>相對於 Windows、FreeBSD 作業系統都有官方維護的基礎元件(base component)，我們常見到的 Linux 發行版基本上就是一個全然的「拼裝車」，組合各個不同來源的專案原始碼組合成一個有實際用途的「<a href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F#%E9%80%9A%E7%94%A8%E4%B8%8E%E4%B8%93%E7%94%A8%E3%80%81%E5%B5%8C%E5%85%A5%E5%BC%8F">通用作業系統</a>」。通常發行版的維護者會優先將符合<a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E5%8F%8A%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BD%AF%E4%BB%B6">自由及開放原始碼授權</a>的專案納入其關鍵元件，各個發行版看似五花八門，但終究離不開這個本質。少數發行版(如: Ubuntu Linux)在法律資源充足下會在安裝期間提供授權不相容(如: Nvidia 驅動、OpenZFS 核心模組)的元件以增進使用者體驗。但在大部分情況下，只要是授權有疑慮或明定不開放散佈原始碼的軟體，在發行版整合上就是一個巨大的阻礙，因為這意味者我們無法透過社群合作的機制，讓更熟悉軟體開發部署工程的人檢視我們平常使用的程式是否是易於使用、沒有潛在問題的。</p><p>而我們在 Unix-like (Linux、FreeBSD、Solaris、更早期的 SunOS…等) 環境下，最早期藉由原始碼安裝軟體方式，就是進入原始碼資料夾。執行 <code>make</code> 將軟體編譯完成後，再使用 root 權限 <code>make install</code>，將軟體安裝到預設的路徑 ( <code>/usr/local</code> ) 下。但現在我們已經極度不建議安裝用這樣的方式在預設路徑( <code>/usr/local</code> )，因為容易跟其他也手動安裝在同位置的套件混淆，使得嘗試解除安裝的過程中容易誤刪手動 <code>make install</code> 安裝其他套件的檔案，讓升級或解除安裝套件更加複雜。更別說在「不重複安裝」的前提下，解決 A 函式庫一更新，以它為基礎的 B 專案就得重新編譯才能找到 A 以執行的常見問題了。</p><p>因此我們開始使用了「套件打包」的機制，藉由單一專案的軟體打包管理程式(dpkg, rpm)，統一發行版內軟體管理的秩序。</p><h2 id="使用情境-–-為什麼要「打包」SAC">使用情境 – 為什麼要「打包」SAC?</h2><p>SAC 全名是 Seismic Analysis Code，是個歷史悠久的地震學資料處理軟體，由美國的 IRIS (地震學研究機構聯合會) 團隊開發，主要使用 C 語言開發，需在相容 Unix-like (如 Linux, FreeBSD, Cygwin…等) 的 X 視窗系統下才能正常使用，並只提供相關原始碼、執行檔給非特殊國家之地震學相關人員。若需取得相關程式需至官方網站<a href="https://ds.iris.edu/ds/nodes/dmc/forms/sac/">填寫申請表單</a>，由該單位人員審核後才可藉由 email 附件取得檔案。</p><p>傳統而言，在同一作業系統環境下安裝 SAC 有兩種途徑，第一種是直接把 IRIS 提供的執行檔手動放到指定位置 ( Linux 下指定 <code>/usr/local</code> ) 後執行，第二種是在作業系統下自行使用 gcc 等編譯器建置後安裝到自行指定的位置 (若未指定則仍安裝到 <code>/usr/local</code> )</p><p>第一種方法的方便之處在於說，不需要瞭解太多 Linux / Unix 的基礎知識與相關操作就可以藉由非常基本的指令 (cp, sudo…等) 完成安裝</p><p>缺點在於只能安裝在 <a href="https://zh.wikipedia.org/zh-tw/X86">x86</a>/<a href="https://zh.wikipedia.org/zh-tw/X86-64">x86_64</a> 平臺下的 CPU 才能順利執行的 Linux 執行檔，也就是說若你今天想在同樣安裝 Linux 的小型開發板 (如：樹梅派、Apple Silicon M1 上執行的虛擬機器)或是在官方沒考慮的 Unix-like 環境(Cygwin, FreeBSD, Termux)下執行是做不到的 (樹梅派或許可以在上面開 QEMU 模擬，但速度可預想是非常非常慢的)</p><p>另外第一種方法也無法自行客製化相關功能，這限制的問題在於說用此方法安裝的 SAC 程式只能在極度有限的操作體驗下進行，而使得剛熟悉 bash 等指令介面的使用者進入 SAC 的指令介面會發現 TAB 自動補完、上下、結束時保留指令歷史、Ctrl+R 搜尋歷史等在 bash 有的功能這邊都沒有或限制更多。但如果客製化編譯就可以藉由增加相關選項就可以改善。</p><p>因此我們知道如果藉由第二種方法有可修改安裝路徑、自行增減相關功能、移植更方便等優勢，但此方法對於沒有接觸過系統管理、程式開發的使用者挑戰並不小，且若想要提供給多個各自符合資格的人員，安裝一樣客製化設定同時符合易於安裝、升級、解除安裝原則的 SAC 程式也勢必會花費很多心力。此時發行版下的套件管理工具就是我們很重要的夥伴了! 在這邊我們將用 Debian/Ubuntu 下的 <code>apt</code> (<code>dpkg</code>) 工具來協助我們更輕易地部署「我們的 SAC」</p><h2 id="SAC-Debian-Ubuntu-Packager-介紹">SAC Debian/Ubuntu Packager 介紹</h2><p><img src="https://github.com/sean0921/sean0921.github.io/raw/3ef1e32d61fc62c546c6ba31ef526ccc050cc7b2/images/demo.gif" alt=""></p><p>這個工具使用最基本的 Shell Script 腳本，搭配 <code>dpkg</code> 程式，將編譯後的 SAC 程式放置在特定資料夾後，再加入軟體資訊後打包壓縮成單一安裝檔 (<code>&lt;pkg_name&gt;.deb</code>)，最後再由使用者從 <code>apt</code> 程式安裝該套件，納入發行版套件管理系統的記錄中。</p><p>由以上討論我們可以歸納這個方法的好處：</p><ol><li>使得 SAC 更易於安裝、解除安裝、升級</li><li>SAC 底層用到的函式庫一旦有重大升級，發行版套件管理程式（<code>apt</code>）會跳出相關警告，讓你記得要重新安裝程式。</li><li>減少繁瑣的環境變數設定</li></ol><p>使用這個工具安裝 SAC 之前，符合相關資格的使用者仍需自行至 IRIS 網站申請下載原始碼，以遵守授權相關規範。詳細安裝方式請參考 <a href="https://github.com/sean0921/sac_debian_packager">GitHub</a> 上的 README 頁面。</p><h2 id="結論">結論</h2><p>套件打包適合用在一定數量的人會安裝的軟體上，以減少繁瑣安裝過程中可能會出錯的機率，以增進效率並兼顧使用體驗。也是讓 Linux 在有限硬碟空間下提供完整功能的關鍵。若有心在未來的專案上利用 Linux 環境作為開發測試平臺，這仍然是不可或缺的知識。</p>]]></content:encoded>
-      
-      
-      
-      <category domain="https://blog.clam.ml/tags/packaging/">packaging</category>
-      
-      <category domain="https://blog.clam.ml/tags/linux/">linux</category>
-      
-      <category domain="https://blog.clam.ml/tags/sysadmin/">sysadmin</category>
-      
-      <category domain="https://blog.clam.ml/tags/seismology/">seismology</category>
-      
-      
-      <comments>https://blog.clam.ml/2021/06/06/sac-debian-packaging/#disqus_thread</comments>
       
     </item>
     
