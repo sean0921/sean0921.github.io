@@ -54,7 +54,7 @@ ln -rsv "${HOME}/.local/bin/yt-dlp" "${HOME}/.local/bin/youtube-dl"   ## 如果�
 ### 更改 mpv 設定檔 (適用於 >= 0.33 版本)
 上一個方法看似單純，卻容易在更新套件時把你的環境搞炸。因此我會建議能將 mpv 更新到此版本的使用者都使用此方法。
 
-首先我們可以先找出 mpv 設定檔的存放路徑，相關說明可以在官方文件找到。Windows 的使用者可以將它放在 `%USERPROFILE%\AppData\Roaming\mpv\mpv.conf` 或是同資料夾下的 `portable_config/mpv.conf`，Linux/FreeBSD 使用者則是可以去 `~/.config/mpv/mpv.conf` 新增或更改自己的設定檔。
+首先我們可以先找出 mpv 設定檔的存放路徑，相關說明可以在官方文件找到。Windows 的使用者可以將它放在 `%USERPROFILE%\AppData\Roaming\mpv\mpv.conf` 或是同資料夾下的 `portable_config\mpv.conf`，Linux/FreeBSD 使用者則是可以去 `~/.config/mpv/mpv.conf` 新增或更改自己的設定檔。
 
 然後我們只需要在設定檔新增以下一行:
 ```
