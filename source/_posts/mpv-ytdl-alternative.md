@@ -1,11 +1,13 @@
 ---
 title: 如何在串流播放器使用 youtube-dl 的替代品 - 以 mpv 為例
 tags:
-- youtube-dl
-- mpv
-- yt-dlp
-- video-streaming
+  - youtube-dl
+  - mpv
+  - yt-dlp
+  - video-streaming
+date: 2021-10-16 05:19:42
 ---
+
 
 本篇文章將以 mpv 影音播放器為例，介紹如何在該軟體 0.33 之後的版本快速替換 youtube-dl 外掛所使用的路徑
 
