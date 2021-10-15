@@ -44,7 +44,19 @@ jobs:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
           publish_dir: ./public
           publish_branch: gh-pages  # deploying branch
-          cname: ${{ env.CNAME_ml }}
+      - name: Change CNAME
+        run: |
+          echo "${CNAME_ml}" | tee ./public/CNAME
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DEPLOY_TOKEN }}
+        with:
+          source-directory: 'public'
+          destination-github-username: 'sean0921'
+          destination-repository-name: ${{ env.CNAME_ml }}
+          user-email: sean.li.shin.ho@gmail.com
+          target-branch: master
       - name: Change CNAME
         run: |
           echo "${CNAME_moe}" | tee ./public/CNAME
