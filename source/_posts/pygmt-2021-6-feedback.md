@@ -113,3 +113,18 @@ fig.savefig('archi_sea_pygmt.png')
 - 整理分享更多樣的繪圖腳本紀錄供社群參考，以利讓更多人在有意願嘗試時有個參考依據。
 
 對於那些前仆後繼在 GMT 相關專案投入大量心力改善軟體品質的前輩，個人也給予深深的尊敬與肯定，自己能做的除了以上那些，可能也只有幫忙打包新版的程式到自己習慣用的 Linux 發行版(Archlinux Arch Users Repository)，方便別人嘗鮮吧。
+
+## 後記
+- 2021/10/31: [v0.5.0](https://github.com/GenericMappingTools/pygmt/releases/tag/v0.5.0) 開始支援多項函式，算是重要的 release 之一，有興趣或已經入坑的人可以嘗試看看:
+  - project(我最在意的)
+  - blockmode
+  - gmtselect
+  - grd2xyz
+  - grdproject
+  - grdsample
+  - grdvolume
+  - nearneighbor
+  - sph2grd
+  - sphdistance
+  - sphinterpolate
+  - xyz2grd
