@@ -20,6 +20,6 @@ date: 2021-07-03 04:13:43
 
 * [simplemeca-flask](https://github.com/sean0921/simplemeca-flask): 線上震源機制解，嘗試結合 PyGMT 套件與 Flask 框架，測試 PyGMT 運用在網頁服務下的使用體驗。相關網站: <https://beachball.clam.moe>
 
-* [NonLinLoc Documents](https://nll.clam.moe/): 利用 NonLinLoc 作者提供的新版文件原始碼，結合 GitHub Action 自動建置線上文件，提供穩定開源文件備份，並作為文件內容改善測試之用途。
+* [NonLinLoc Documents](https://nlloc.clam.moe/): 利用 NonLinLoc 作者提供的新版文件原始碼，結合 GitHub Action 自動建置線上文件，提供穩定開源文件備份，並作為文件內容改善測試之用途。
 
 * [GMT-Tutorial Documents](https://sean0921.github.io/GMT-tutorials/): 利用 NonLinLoc 作者提供的新版文件原始碼，結合 GitHub Action 自動建置線上文件，提供穩定開源文件備份，並作為文件內容改善測試之用途。
