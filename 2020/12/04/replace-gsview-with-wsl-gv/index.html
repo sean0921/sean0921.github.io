@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -16,12 +15,13 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="很多人在 Windows 上觀看從 GMT 或 其他繪圖軟體產生的 postscript 檔 (*.ps) 時，都會選擇下載 Ghostgum GSview 5.0 或破解版 GSview 6.0，然而無論何種版本，該軟體早已不再被官方或第三方維護。有任何軟體問題或是安全性問題基本上等於無解。但 Linux 或其他 Unix-Like 平臺仍有 GNU gv 可以使用與回報相關問題，甚至提供 gi">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="很多人在 Windows 上觀看從 GMT 或 其他繪圖軟體產生的 postscript 檔 (*.ps) 時，都會選擇下載 Ghostgum GSview 5.0 或破解版 GSview 6.0，然而無論何種版本，該軟體早已不再被官方或第三方維護。有任何軟體問題或是安全性問題基本上等於無解。但 Linux 或其他 Unix-Like 平臺仍有 GNU gv 可以使用與回報相關問題，甚至提供 gi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 WSL&#x2F;WSL2 的 gv 取代過時的 gsview">
 <meta property="og:url" content="https://blog.clam.ml/2020/12/04/replace-gsview-with-wsl-gv/index.html">
@@ -29,7 +29,7 @@
 <meta property="og:description" content="很多人在 Windows 上觀看從 GMT 或 其他繪圖軟體產生的 postscript 檔 (*.ps) 時，都會選擇下載 Ghostgum GSview 5.0 或破解版 GSview 6.0，然而無論何種版本，該軟體早已不再被官方或第三方維護。有任何軟體問題或是安全性問題基本上等於無解。但 Linux 或其他 Unix-Like 平臺仍有 GNU gv 可以使用與回報相關問題，甚至提供 gi">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-12-04T04:24:08.000Z">
-<meta property="article:modified_time" content="2022-02-07T07:59:43.870Z">
+<meta property="article:modified_time" content="2022-03-02T03:32:18.795Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="freesoftware">
@@ -45,6 +45,7 @@
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>使用 WSL/WSL2 的 gv 取代過時的 gsview | Sean's Blog</title>
   
+
 
 
 
@@ -74,7 +75,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Sean's Blog</h1>
+      <p class="site-title">Sean's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">less is more, old is new.</p>
@@ -127,15 +128,14 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-overview">
-            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Ho</p>
   <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives">
+        <a href="/archives/">
           <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
@@ -149,7 +149,6 @@
 
 
 
-          </div>
         </div>
       </div>
     </div>
@@ -186,11 +185,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Sean Ho">
-      <meta itemprop="description" content="New Blog site construted by Hexo (nodejs package)">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's Blog">
+      <meta itemprop="description" content="New Blog site construted by Hexo (nodejs package)">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用 WSL/WSL2 的 gv 取代過時的 gsview | Sean's Blog">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -207,13 +211,13 @@
 
       <time title="Created: 2020-12-04 12:24:08" itemprop="dateCreated datePublished" datetime="2020-12-04T12:24:08+08:00">2020-12-04</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-02-07 15:59:43" itemprop="dateModified" datetime="2022-02-07T15:59:43+08:00">2022-02-07</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-03-02 11:32:18" itemprop="dateModified" datetime="2022-03-02T11:32:18+08:00">2022-03-02</time>
+    </span>
 
   
 </div>
@@ -308,6 +312,8 @@
   
 
 
+
+  <script src="/js/third-party/fancybox.js"></script>
 
 
   
