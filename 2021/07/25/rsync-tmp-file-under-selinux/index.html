@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -29,7 +29,7 @@
 <meta property="og:description" content="這篇筆記主要描述如何從 rsync 運作原理，來理解在 SELinux 啟用的情況下，如何正確設定 rsync 暫存區路徑參數與暫存目錄權限。rsync 接收同步資料時，會先將抓取未驗證的檔案放在暫存目錄，經校驗無誤後再移動到同步目的地。如果 rsync 設定 --temp-file 目錄路徑的預設 context 與目的地目錄的不同，則會發生目的地出現檔案實際 context 與該路徑下預設內容">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-07-25T10:34:20.000Z">
-<meta property="article:modified_time" content="2022-04-27T05:53:59.661Z">
+<meta property="article:modified_time" content="2022-04-27T05:58:02.835Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="sysadmin">
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-04-27 13:53:59" itemprop="dateModified" datetime="2022-04-27T13:53:59+08:00">2022-04-27</time>
+      <time title="Modified: 2022-04-27 13:58:02" itemprop="dateModified" datetime="2022-04-27T13:58:02+08:00">2022-04-27</time>
     </span>
 
   
