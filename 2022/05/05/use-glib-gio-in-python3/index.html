@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.clam.ml","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="假如你在 Ubuntu 使用 Python 進行資料處理，對於一些檔案懷抱著想移出視線又怕刪掉就回不去的情感，怎麼辦? 這篇文章介紹的工具與概念，或許可以提供你一個對於整合桌面環境更加友善的方向。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Ubuntu 桌面中使用 Python 將檔案丟到資源回收桶">
+<meta property="og:url" content="https://blog.clam.ml/2022/05/05/use-glib-gio-in-python3/index.html">
+<meta property="og:site_name" content="Sean&#39;s Blog">
+<meta property="og:description" content="假如你在 Ubuntu 使用 Python 進行資料處理，對於一些檔案懷抱著想移出視線又怕刪掉就回不去的情感，怎麼辦? 這篇文章介紹的工具與概念，或許可以提供你一個對於整合桌面環境更加友善的方向。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/GTK%2B_software_architecture.svg/2560px-GTK%2B_software_architecture.svg.png">
+<meta property="article:published_time" content="2022-05-05T15:02:56.000Z">
+<meta property="article:modified_time" content="2022-05-05T15:04:45.902Z">
+<meta property="article:author" content="Sean Ho">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="opensource">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="GLib">
+<meta property="article:tag" content="Gio">
+<meta property="article:tag" content="Gtk">
+<meta property="article:tag" content="GNOME">
+<meta property="article:tag" content="data operation">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/GTK%2B_software_architecture.svg/2560px-GTK%2B_software_architecture.svg.png">
+
+
+<link rel="canonical" href="https://blog.clam.ml/2022/05/05/use-glib-gio-in-python3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-tw","comments":true,"permalink":"https://blog.clam.ml/2022/05/05/use-glib-gio-in-python3/","path":"2022/05/05/use-glib-gio-in-python3/","title":"在 Ubuntu 桌面中使用 Python 將檔案丟到資源回收桶"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在 Ubuntu 桌面中使用 Python 將檔案丟到資源回收桶 | Sean's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Sean's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Sean's Blog" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sean's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">less is more, old is new.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E6%83%85%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">初始情境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">可利用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9A%E9%BA%BC%E6%98%AF-Glib%E3%80%81%E5%9C%A8-Gtk-%E5%AE%B6%E6%97%8F%E8%A3%A1%E7%9A%84%E9%97%9C%E4%BF%82"><span class="nav-number">3.</span> <span class="nav-text">甚麼是 Glib、在 Gtk 家族裡的關係?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Python-%E5%B0%87%E6%AA%94%E6%A1%88%E4%B8%9F%E5%88%B0%E8%B3%87%E6%BA%90%E5%9B%9E%E6%94%B6%E6%A1%B6"><span class="nav-number">4.</span> <span class="nav-text">如何使用 Python 將檔案丟到資源回收桶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.1.</span> <span class="nav-text">相關程式碼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-Reference"><span class="nav-number">5.</span> <span class="nav-text">API Reference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%89%E7%94%A8-send2trash"><span class="nav-number">6.</span> <span class="nav-text">應用: send2trash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E%E8%88%87%E8%A8%8E%E8%AB%96"><span class="nav-number">7.</span> <span class="nav-text">結語與討論</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sean Ho</p>
+  <div class="site-description" itemprop="description">New Blog site construted by Hexo (nodejs package)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://blog.clam.ml/2022/05/05/use-glib-gio-in-python3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Ho">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's Blog">
+      <meta itemprop="description" content="New Blog site construted by Hexo (nodejs package)">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在 Ubuntu 桌面中使用 Python 將檔案丟到資源回收桶 | Sean's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 Ubuntu 桌面中使用 Python 將檔案丟到資源回收桶
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-05-05 23:02:56 / Modified: 23:04:45" itemprop="dateCreated datePublished" datetime="2022-05-05T23:02:56+08:00">2022-05-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>假如你在 Ubuntu 使用 Python 進行資料處理，對於一些檔案懷抱著想移出視線又怕刪掉就回不去的情感，怎麼辦? 這篇文章介紹的工具與概念，或許可以提供你一個對於整合桌面環境更加友善的方向。</p>
+<span id="more"></span>
+<h2 id="初始情境">初始情境</h2>
+<ul>
+<li>我們在用 Python 進行資料處理的時候，會想將不要的檔案移出工作目錄，但又不想要不小心誤刪檔案而救不回來。類似 mv 的操作也會有同名檔案處理起來相對複雜的問題。</li>
+<li>Python 的標準函式庫的檔案相關操作，無法滿足在桌面使用情境下對應的操作需求，以這邊為例就是<em>把檔案丟到資源回收桶</em>。</li>
+</ul>
+<h2 id="可利用方法">可利用方法</h2>
+<ul>
+<li>我們想要在 GNOME 桌面環境將檔案丟到資源回收桶，有哪些方式呢:
+<ol>
+<li>使用檔案總管(Nautilus)將檔案拖拉到資源回收桶資料夾</li>
+<li>透過 <code>gio</code> 對檔案進行操作</li>
+<li>透過呼叫 Glib 中 Gio 的相關函式對檔案進行操作</li>
+</ol>
+</li>
+<li>這邊要介紹的主要是第三種，而第二種為第三種的簡易應用。</li>
+</ul>
+<h2 id="甚麼是-Glib、在-Gtk-家族裡的關係">甚麼是 Glib、在 Gtk 家族裡的關係?</h2>
+<ul>
+<li>GLib 是 GNOME 將原本 gtk 函式庫裡面跟圖形介面無關的底層程式碼獨立出來的一個專案, 它們和其他 gtk 相關專案的關係圖如下:<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/GTK%2B_software_architecture.svg/2560px-GTK%2B_software_architecture.svg.png" alt=""></li>
+</ul>
+<h2 id="如何使用-Python-將檔案丟到資源回收桶">如何使用 Python 將檔案丟到資源回收桶</h2>
+<ul>
+<li>首先，作業系統環境一定要安裝 GLib 函式庫，Python 套件則是需要安裝 PyGObject</li>
+<li>若想透過 <code>gio</code> 等 shell 指令直接對 GLib 進行利用，在 Debian/Ubuntu 下需要確認是否有安裝到 <code>libglib2-bin</code> (該類發行版套件會切比較細)</li>
+</ul>
+<h3 id="相關程式碼">相關程式碼</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line">file_path = <span class="string">&#x27;/path/to/filename&#x27;</span></span><br><span class="line"><span class="keyword">from</span> gi.repository <span class="keyword">import</span> Gio</span><br><span class="line">a=Gio.File.new_for_path(file_path)</span><br><span class="line"><span class="keyword">if</span> a.trash() == <span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;file_path&#125;</span> is moved to trash!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>以上程式碼大致可以對應到 <code>gio trash /path/to/filename</code> 這個指令，若是對應圖形介面操作，就是把 <code>/path/to/filename</code> 丟到資源回收桶，完工</p>
+<h2 id="API-Reference">API Reference</h2>
+<p>這邊直接附上 GLib 的函式庫(1)，至於 PyGObject 那一側則還沒找到官方詳細文件，因此先拿它恰巧有出沒過的文件連結(2)替代，若有找到更完整的資料歡迎提供！</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/File.html#Gio.File">https://lazka.github.io/pgi-docs/Gio-2.0/classes/File.html#Gio.File</a></li>
+<li><a target="_blank" rel="noopener" href="https://pygobject.readthedocs.io/en/latest/guide/threading.html?highlight=Gio.File#asynchronous-operations">https://pygobject.readthedocs.io/en/latest/guide/threading.html?highlight=Gio.File#asynchronous-operations</a></li>
+</ol>
+<h2 id="應用-send2trash">應用: send2trash</h2>
+<p>於是這樣簡潔方便的介面使得 <a target="_blank" rel="noopener" href="https://github.com/arsenetar/send2trash/">send2trash</a> 這個第三方 Python 套件於 2013 年即開始支援以 Gio 來進行檔案移至資源回收筒的<a target="_blank" rel="noopener" href="https://github.com/arsenetar/send2trash/blob/master/send2trash/plat_gio.py">實作</a>方式。是不是相當單純呢?</p>
+<h2 id="結語與討論">結語與討論</h2>
+<p>GLib 除了本文介紹的範例外，也有許多有趣的模組與函式可以讓我們探索與應用，理解其概念，也將對我們開發、協助除錯 GNOME、GTK 相關開源桌面程式有莫大幫助，是個值得一探究竟的專案！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/opensource/" rel="tag"># opensource</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/GLib/" rel="tag"># GLib</a>
+              <a href="/tags/Gio/" rel="tag"># Gio</a>
+              <a href="/tags/Gtk/" rel="tag"># Gtk</a>
+              <a href="/tags/GNOME/" rel="tag"># GNOME</a>
+              <a href="/tags/data-operation/" rel="tag"># data operation</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/16/mpv-ytdl-alternative/" rel="prev" title="如何在串流播放器使用 youtube-dl 的替代品 - 以 mpv 為例">
+                  <i class="fa fa-chevron-left"></i> 如何在串流播放器使用 youtube-dl 的替代品 - 以 mpv 為例
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-glass-cheers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sean Ho</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
