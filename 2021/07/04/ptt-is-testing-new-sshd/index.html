@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/rphrOxQ.png">
 <meta property="og:image" content="https://i.imgur.com/6aPiuHM.png">
 <meta property="article:published_time" content="2021-07-04T09:49:11.000Z">
-<meta property="article:modified_time" content="2022-08-03T03:15:34.642Z">
+<meta property="article:modified_time" content="2022-10-18T15:30:10.780Z">
 <meta property="article:author" content="Sean Ho">
 <meta property="article:tag" content="opensource">
 <meta property="article:tag" content="foss">
@@ -133,7 +133,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F"><span class="nav-number">1.</span> <span class="nav-text">觀察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E8%88%87%E8%A8%8E%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">分析與討論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%98%97%E8%A9%A6%E6%96%B9%E6%A1%88-%E6%9A%AB%E5%81%9C-ssh-%E9%80%A3%E7%B7%9A-%E8%A7%80%E5%AF%9F"><span class="nav-number">3.</span> <span class="nav-text">嘗試方案: 暫停 ssh 連線 -&gt; 觀察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%99%E6%96%B9%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%A5-logind-%E7%82%BA%E5%9F%BA%E7%A4%8E%E9%87%8D%E6%96%B0%E5%AF%A6%E4%BD%9C-SSH-server"><span class="nav-number">4.</span> <span class="nav-text">站方解決方案：以 logind 為基礎重新實作 SSH server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E-2"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F"><span class="nav-number">1.</span> <span class="nav-text">觀察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E8%88%87%E8%A8%8E%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">分析與討論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%98%97%E8%A9%A6%E6%96%B9%E6%A1%88-%E6%9A%AB%E5%81%9C-ssh-%E9%80%A3%E7%B7%9A-%E8%A7%80%E5%AF%9F"><span class="nav-number">3.</span> <span class="nav-text">嘗試方案: 暫停 ssh 連線 -&gt; 觀察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%99%E6%96%B9%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%A5-logind-%E7%82%BA%E5%9F%BA%E7%A4%8E%E9%87%8D%E6%96%B0%E5%AF%A6%E4%BD%9C-SSH-server"><span class="nav-number">4.</span> <span class="nav-text">站方解決方案：以 logind 為基礎重新實作 SSH server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-03 11:15:34" itemprop="dateModified" datetime="2022-08-03T11:15:34+08:00">2022-08-03</time>
+      <time title="Modified: 2022-10-18 23:30:10" itemprop="dateModified" datetime="2022-10-18T23:30:10+08:00">2022-10-18</time>
     </span>
 
   
@@ -272,7 +272,7 @@
 <p><img src="https://i.imgur.com/rphrOxQ.png" alt="7/3 當日使用者上線統計"><br>
 <img src="https://i.imgur.com/6aPiuHM.png" alt="5/13 當日使用者上線統計"></p>
 <p>目前從 <em>主選單 &gt; (X) &gt; (U) &gt; (Y) &gt; (U)</em> 進入昨日使用者統計來觀察 ptt 一天上線人次，已經不若以往每逢尖峰時間必過載的情形發生。但實際上而言能夠承受的密集大量登入程度為何，仍有待時間的考驗，以及是否有重大事件足以提供測試的契機了。</p>
-<h2 id="結語-2">結語</h2>
+<h2 id="結語">結語</h2>
 <p>在有限的資源下維護開源專案都是不容易的，尤其因為 Ptt 的特殊性質，更難以導入用別人錢(贊助)就可以解決問題的方案。在這樣情況下還能有這樣進展，我們或許該充分體認到這類的事情都不是理所當然的。</p>
 
     </div>
