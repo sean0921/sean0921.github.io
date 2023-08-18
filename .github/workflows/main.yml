@@ -8,7 +8,7 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     env:
-      CNAME_ml: blog.clam.ml
+      CNAME_tw: blog.clam.tw
       CNAME_moe: blog.clam.moe
     steps:
       - name: Checkout
@@ -46,7 +46,7 @@ jobs:
           publish_branch: gh-pages  # deploying branch
       - name: Change CNAME
         run: |
-          echo "${CNAME_ml}" | tee ./public/CNAME
+          echo "${CNAME_tw}" | tee ./public/CNAME
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -54,7 +54,7 @@ jobs:
         with:
           source-directory: 'public'
           destination-github-username: 'sean0921'
-          destination-repository-name: ${{ env.CNAME_ml }}
+          destination-repository-name: ${{ env.CNAME_tw }}
           user-email: sean.li.shin.ho@gmail.com
           target-branch: master
       - name: Change CNAME
