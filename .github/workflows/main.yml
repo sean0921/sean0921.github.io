@@ -15,7 +15,7 @@ jobs:
       CNAME_moe: blog.clam.moe
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: master
           # Whether to checkout submodules: `true` to checkout submodules or `recursive` to
@@ -26,12 +26,12 @@ jobs:
           #
           # Default: false
           submodules: 'recursive'
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Cache NPM dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.OS }}-npm-cache
@@ -42,7 +42,7 @@ jobs:
       - name: Build
         run: TZ=Asia/Taipei npm run build
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.DEPLOY_TOKEN }}
           publish_dir: ./public
